@@ -1,66 +1,44 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Hero from '@/components/Hero';
+import AboutUs from '@/components/AboutUs';
+import ScrollReveal from '@/components/ScrollReveal';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Hero />
+      <AboutUs />
+      <div className={styles.content}>
+        <div className={styles.container}>
+          <ScrollReveal>
+            <h2 className={styles.sectionTitle}>Welcome to Chitralekha Boutique Resort</h2>
+            <p className={styles.sectionText}>
+              Experience tranquility and luxury in the heart of nature. Our boutique resort
+              offers a perfect escape from the everyday hustle.
+            </p>
+          </ScrollReveal>
+          <div className={styles.features}>
+            <ScrollReveal>
+              <div className={styles.feature}>
+                <h3>Serene Location</h3>
+                <p>Nestled in peaceful surroundings</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div className={styles.feature}>
+                <h3>Luxury Amenities</h3>
+                <p>Modern comfort meets natural beauty</p>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div className={styles.feature}>
+                <h3>Personalized Service</h3>
+                <p>Tailored experiences for every guest</p>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,0 +1,219 @@
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawLine {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+/* ── Section wrapper ───────────────────────────────── */
+.section {
+  background: #f8f9f5;
+  padding: 6rem 2rem;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Tag / eyebrow ─────────────────────────────────── */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #465b3c;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+}
+
+/* ── Heading ───────────────────────────────────────── */
+.heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #1a2614;
+  line-height: 1.15;
+  margin-bottom: 0;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.25s forwards;
+}
+
+.accent {
+  color: #465b3c;
+}
+
+.divider {
+  height: 2px;
+  background: #465b3c;
+  border-radius: 2px;
+  margin: 1.25rem 0 2rem;
+  width: 0;
+  animation: drawLine 0.6s ease 0.5s forwards;
+}
+
+/* ── Two-column layout ─────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+/* ── Left: text side ───────────────────────────────── */
+.textSide p {
+  font-size: 1rem;
+  color: #4a5e3a;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.textSide p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: #465b3c;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.ctaBtn:hover {
+  background: #354830;
+  transform: translateY(-2px);
+}
+
+/* ── Stats row ─────────────────────────────────────── */
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #dde8d4;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #465b3c;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7a8f6a;
+  margin-top: 0.3rem;
+}
+
+/* ── Right: image cards grid ───────────────────────── */
+.imageSide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* tall card spans 2 rows */
+.card:first-child {
+  grid-row: span 2;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .cardImg {
+  transform: scale(1.07);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 35, 10, 0.72) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+}
+
+.card:hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageSide {
+    grid-template-rows: 200px 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  .imageSide {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .card:first-child {
+    grid-row: span 1;
+    height: 240px;
+  }
+
+  .card {
+    height: 200px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+}
