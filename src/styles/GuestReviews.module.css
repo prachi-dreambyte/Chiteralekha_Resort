@@ -1,0 +1,263 @@
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section ───────────────────────────────────────── */
+.section {
+  position: relative;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+
+/* Background image — reuse one of the resort images */
+.bg {
+  position: absolute;
+  inset: 0;
+  background: url('/assets/images/o9.webp') center / cover no-repeat;
+  z-index: 0;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 8, 0.72);
+  z-index: 1;
+}
+
+/* ── Inner wrapper ─────────────────────────────────── */
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+/* ── Header row ────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+.visible .header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.heading {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* ── Nav buttons ───────────────────────────────────── */
+.navBtns {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.navBtn:hover {
+  background: #c87941;
+  border-color: #c87941;
+}
+
+/* ── Carousel track ────────────────────────────────── */
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 340px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+}
+
+.visible .track {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Card ──────────────────────────────────────────── */
+.card {
+  position: absolute;
+  width: 380px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem 2rem 1.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition:
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.55s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+
+  /* transform is set inline via JS */
+}
+
+/* Active (center) card */
+.cardActive {
+  background: #c87941;
+  box-shadow: 0 16px 48px rgba(200, 121, 65, 0.45);
+  cursor: default;
+  z-index: 3;
+}
+
+/* Peek cards (±2) */
+.cardPeek {
+  z-index: 1;
+}
+
+/* ── Quote icon ────────────────────────────────────── */
+.quoteIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.07);
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+
+.cardActive .quoteIcon {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Card top (avatar + name) ──────────────────────── */
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.avatarImg {
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a2614;
+  margin: 0 0 0.15rem;
+}
+
+.cardActive .name {
+  color: #fff;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: #7a8c6a;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.cardActive .role {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Review text ───────────────────────────────────── */
+.text {
+  font-size: 0.95rem;
+  color: #4a5e3a;
+  line-height: 1.75;
+  margin: 0 0 1.25rem;
+  font-style: italic;
+}
+
+.cardActive .text {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ── Stars ─────────────────────────────────────────── */
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  font-size: 1rem;
+  color: #e8a838;
+}
+
+.cardActive .star {
+  color: #fff;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .card {
+    width: 320px;
+  }
+
+  .track {
+    height: 360px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 60px 0 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .card {
+    width: 280px;
+  }
+
+  .track {
+    height: 380px;
+  }
+}

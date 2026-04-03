@@ -1,14 +1,16 @@
-import Hero from '@/components/Hero';
-import AboutUs from '@/components/AboutUs';
-import ScrollReveal from '@/components/ScrollReveal';
-import styles from './page.module.css';
+import Hero from '@/pages/Homepage/Hero';
+import AboutUs from '@/pages/Homepage/AboutUs';
+import GuestReviews from '@/pages/Homepage/GuestReviews';
+import InstaReels from '@/pages/Homepage/InstaReels';
 
 export default function Home() {
   return (
     <>
       <Hero />
       <AboutUs />
-      <div className={styles.content}>
+      <GuestReviews />
+      <InstaReels />
+      {/* <div className={styles.content}>
         <div className={styles.container}>
           <ScrollReveal>
             <h2 className={styles.sectionTitle}>Welcome to Chitralekha Boutique Resort</h2>
@@ -38,7 +40,7 @@ export default function Home() {
             </ScrollReveal>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

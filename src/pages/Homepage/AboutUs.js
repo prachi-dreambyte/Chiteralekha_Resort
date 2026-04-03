@@ -1,8 +1,17 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './AboutUs.module.css';
+import styles from '../../styles/AboutUs.module.css';
+
+const whyPanels = [
+  { src: '/assets/images/n1.webp', label: 'Pench' },
+  { src: '/assets/images/n2.webp', label: 'Kanha' },
+  { src: '/assets/images/n3.webp', label: 'Tadoba' },
+  { src: '/assets/images/n4.webp', label: 'Bandhavgarh' },
+  { src: '/assets/images/n5.webp', label: 'Satpura' },
+];
 
 const cards = [
   { src: '/assets/images/o9.webp', label: 'Mountain Views',   tall: true },
@@ -17,19 +26,33 @@ const stats = [
 ];
 
 export default function AboutUs() {
+  const whyRef = useRef(null);
+
+  useEffect(() => {
+    const el = whyRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) el.classList.add(styles.whyVisible); },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <p className={styles.eyebrow}>Our Story</p>
-        <h2 className={styles.heading}>
-          A Retreat Born from <span className={styles.accent}>Passion</span>
-          <br />& Love for Nature
-        </h2>
+       
         <div className={styles.divider} />
 
         <div className={styles.grid}>
           {/* Left — text */}
           <div className={styles.textSide}>
+             <h2 className={styles.heading}>
+          A Retreat Born from <span className={styles.accent}>Passion</span>
+          <br />& Love for Nature
+        </h2>
             <p>
               Nestled in the lap of the mountains, Chitralekha Boutique Resort was
               founded with a single vision — to offer guests an intimate escape where
@@ -45,15 +68,6 @@ export default function AboutUs() {
             <Link href="/about" className={styles.ctaBtn}>
               Discover Our Story
             </Link>
-
-            <div className={styles.stats}>
-              {stats.map((s) => (
-                <div key={s.label} className={styles.stat}>
-                  <span className={styles.statNumber}>{s.number}</span>
-                  <span className={styles.statLabel}>{s.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right — image cards */}
@@ -76,6 +90,34 @@ export default function AboutUs() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* ── Where Adventure Beckons ─────────────────────── */}
+      <div className={styles.whySection} ref={whyRef}>
+        <div className={styles.whyTextBlock}>
+          <h2 className={styles.whyHeading}>WHERE ADVENTURE BECKONS</h2>
+          <p className={styles.whyEyebrow}>Five Wilderness Retreats</p>
+          <p className={styles.whyBody}>
+            Get ready to take a deep breath of comfort, adventure,
+            and tranquility at Chitralekha Boutique Resort.
+          </p>
+        </div>
+
+        <div className={styles.whyGallery}>
+          {whyPanels.map((panel, i) => (
+            <div key={panel.label} className={styles.whyPanel} style={{ '--i': i }}>
+              <Image
+                src={panel.src}
+                alt={panel.label}
+                fill
+                sizes="(max-width: 600px) 100vw, 20vw"
+                className={styles.whyPanelImg}
+              />
+              <div className={styles.whyPanelOverlay} />
+              <span className={styles.whyPanelName}>{panel.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

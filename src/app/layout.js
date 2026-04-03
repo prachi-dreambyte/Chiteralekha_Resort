@@ -1,7 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import styles from './layout.module.css';
 
 export const metadata = {
   title: 'Chitralekha Boutique Resort',
@@ -11,9 +11,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={styles.body}>
+      <body>
         <Header />
-        <main className={styles.main}>{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

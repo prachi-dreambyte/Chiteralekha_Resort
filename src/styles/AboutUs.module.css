@@ -1,0 +1,356 @@
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawLine {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+/* ── Section wrapper ───────────────────────────────── */
+.section {
+  background: #f8f9f5;
+  padding: 60px 40px;
+  overflow: hidden;
+}
+
+.container {
+  /* max-width: 1100px; */
+  width: 95%;
+  margin: 0 auto;
+}
+
+/* ── Tag / eyebrow ─────────────────────────────────── */
+.eyebrow {
+  font-size: 60px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #465b3c;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+  text-align: center;
+}
+
+/* ── Heading ───────────────────────────────────────── */
+.heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #1a2614;
+  line-height: 1.15;
+  margin-bottom: 0;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.25s forwards;
+}
+
+.accent {
+  color: #465b3c;
+}
+
+.divider {
+  height: 2px;
+  background: #465b3c;
+  border-radius: 2px;
+  margin: 1.25rem 0 2rem;
+  width: 0;
+  animation: drawLine 0.6s ease 0.5s forwards;
+}
+
+/* ── Two-column layout ─────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+/* ── Left: text side ───────────────────────────────── */
+.textSide p {
+  font-size: 23px;
+  color: #4a5e3a;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.textSide p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 25px;
+  background: #465b3c;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.ctaBtn:hover {
+  background: #354830;
+  transform: translateY(-2px);
+}
+
+/* ── Right: image cards grid ───────────────────────── */
+.imageSide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 220px 220px;
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* tall card spans 2 rows */
+.card:first-child {
+  grid-row: span 2;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .cardImg {
+  transform: scale(1.07);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 35, 10, 0.72) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+}
+
+.card:hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageSide {
+    grid-template-rows: 200px 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  .imageSide {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .card:first-child {
+    grid-row: span 1;
+    height: 240px;
+  }
+
+  .card {
+    height: 200px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   WHERE ADVENTURE BECKONS SECTION
+   ══════════════════════════════════════════════════════ */
+
+.whySection {
+  margin-top: 6rem;
+  background: #f5f0e8;
+  border-radius: 16px;
+  padding: 30px 220px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* ── Text block ─────────────────────────────────────── */
+.whyTextBlock {
+  margin-bottom: 3rem;
+}
+
+.whyHeading {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #1a2614;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+.whyEyebrow {
+  font-size: 0.82rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #b8860b;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+}
+
+.whyBody {
+  font-size: 0.95rem;
+  color: #5a6e4a;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+/* ── Five-panel accordion gallery ──────────────────── */
+.whyGallery {
+  display: flex;
+  gap: 0.5rem;
+  height: 525px;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+}
+
+.whyPanel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.whyGallery:hover .whyPanel {
+  flex: 0.3;
+}
+
+.whyGallery:hover .whyPanel:hover {
+  flex: 4;
+}
+
+.whyPanelImg {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.whyPanel:hover .whyPanelImg {
+  transform: scale(1.04);
+}
+
+.whyPanelOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 20, 5, 0.7) 0%, transparent 55%);
+  transition: opacity 0.4s ease;
+}
+
+.whyPanel:not(:hover) .whyPanelOverlay {
+  opacity: 0.5;
+}
+
+.whyPanelName {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.25rem;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  white-space: nowrap;
+}
+
+.whyPanel:hover .whyPanelName {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Visible state ─────────────────────────────────── */
+.whyVisible .whyHeading,
+.whyVisible .whyEyebrow,
+.whyVisible .whyBody,
+.whyVisible .whyGallery {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .whyGallery {
+    height: 340px;
+  }
+}
+
+@media (max-width: 600px) {
+  .whySection {
+    padding: 3rem 1.25rem;
+  }
+
+  .whyGallery {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .whyPanel {
+    height: 200px;
+    flex: none;
+  }
+
+  .whyGallery:hover .whyPanel {
+    flex: none;
+    height: 200px;
+  }
+
+  .whyGallery:hover .whyPanel:hover {
+    flex: none;
+    height: 320px;
+  }
+
+  .whyPanelName {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

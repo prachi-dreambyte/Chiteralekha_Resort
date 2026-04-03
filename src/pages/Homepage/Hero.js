@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import styles from './Hero.module.css';
+import styles from '../../styles/Hero.module.css';
 
 const slides = [
   {
