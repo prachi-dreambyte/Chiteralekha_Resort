@@ -1,7 +1,9 @@
 import Hero from '@/pages/Homepage/Hero';
 import AboutUs from '@/pages/Homepage/AboutUs';
+import Rooms from '@/pages/Homepage/Rooms';
 import GuestReviews from '@/pages/Homepage/GuestReviews';
 import InstaReels from '@/pages/Homepage/InstaReels';
+import Facilites from '@/pages/Homepage/Facilites';
 
 export default function Home() {
   return (
@@ -9,7 +11,9 @@ export default function Home() {
       <Hero />
       <AboutUs />
       <GuestReviews />
+      <Rooms />
       <InstaReels />
+      <Facilites />
       {/* <div className={styles.content}>
         <div className={styles.container}>
           <ScrollReveal>

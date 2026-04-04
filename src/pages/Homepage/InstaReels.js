@@ -1,119 +1,128 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import Image from 'next/image';
 import styles from '../../styles/InstaReels.module.css';
 
 const INSTA_PROFILE = 'https://www.instagram.com/chitralekhaboutiqueresort?igsh=MTRmd3ljbjQ5em8ycQ==';
 
 const reels = [
-  { id: 1, url: 'https://www.instagram.com/reel/DWlRaWVE7JM/', thumb: '/assets/images/n1.webp', label: 'Resort Moments' },
-  { id: 2, url: 'https://www.instagram.com/reel/DWgg430Evg1/', thumb: '/assets/images/n2.webp', label: 'Nature & Calm' },
-  { id: 3, url: 'https://www.instagram.com/reel/DUwq1z7kn56/', thumb: '/assets/images/n3.webp', label: 'Spa Vibes' },
-  { id: 4, url: 'https://www.instagram.com/reel/DTacpKhknwx/', thumb: '/assets/images/n4.webp', label: 'Sunset Views' },
-  { id: 5, url: 'https://www.instagram.com/reel/DUZz49JklHA/', thumb: '/assets/images/n5.webp', label: 'Luxury Stay' },
+  { id: 'DWlRaWVE7JM', thumb: '/assets/images/n1.webp', label: 'Resort Moments' },
+  { id: 'DWgg430Evg1', thumb: '/assets/images/n2.webp', label: 'Nature & Calm'  },
+  { id: 'DWLFkzqEk_z', thumb: '/assets/images/n3.webp', label: 'Boutique Life'  },
+  { id: 'DUkl5QBkgLa', thumb: '/assets/images/n4.webp', label: 'Spa Vibes'      },
+  { id: 'DTacpKhknwx', thumb: '/assets/images/n5.webp', label: 'Sunset Views'   },
 ];
 
 export default function InstaReels() {
-  const [active, setActive] = useState(null);
+  const [openId, setOpenId] = useState(null);
+  const cardRefs = useRef({});
 
-  // Escape to close
-  useEffect(() => {
-    const fn = (e) => { if (e.key === 'Escape') setActive(null); };
-    window.addEventListener('keydown', fn);
-    return () => window.removeEventListener('keydown', fn);
-  }, []);
+  const handleOpen = (id) => {
+    setOpenId(id);
+    setTimeout(() => {
+      cardRefs.current[id]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }, 60);
+  };
 
-  // Lock scroll
-  useEffect(() => {
-    document.body.style.overflow = active ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [active]);
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setOpenId(null);
+  };
 
   return (
-    <>
-      <section className={styles.section}>
-        {/* Header */}
-        <div className={styles.header}>
-          <p className={styles.eyebrow}>Where Luxury Meets Every Frame</p>
-          <h2 className={styles.heading}>Discover breathtaking moments and unforgettable experiences captured in every reel.</h2>
-        </div>
+    <section className={styles.section}>
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>Instagram Reels</p>
+        <h2 className={styles.heading}>Life at Chitralekha</h2>
+        <p className={styles.sub}>Tap any reel to watch</p>
+      </div>
 
-        {/* 5 full-size reel cards */}
-        <div className={styles.grid}>
-          {reels.map((reel, i) => (
+      <div className={styles.strip}>
+        {reels.map((reel) => {
+          const isOpen = openId === reel.id;
+
+          return (
             <div
               key={reel.id}
-              className={styles.card}
-              style={{ '--i': i }}
+              ref={(el) => (cardRefs.current[reel.id] = el)}
+              className={`${styles.card} ${isOpen ? styles.cardOpen : ''}`}
+              onClick={() => !isOpen && handleOpen(reel.id)}
+              role={!isOpen ? 'button' : undefined}
+              tabIndex={!isOpen ? 0 : undefined}
+              aria-label={!isOpen ? `Watch ${reel.label}` : undefined}
+              onKeyDown={(e) => e.key === 'Enter' && !isOpen && handleOpen(reel.id)}
             >
-              {/* Embedded reel — autoplay muted */}
-              <iframe
-                src={`${reel.url}embed/`}
-                className={styles.embed}
-                frameBorder="0"
-                scrolling="no"
-                allowTransparency="true"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                title={reel.label}
+              {/* Thumbnail — always in DOM, hidden via CSS when playing */}
+              <Image
+                src={reel.thumb}
+                alt={reel.label}
+                fill
+                sizes="(max-width: 480px) 145px, 200px"
+                className={`${styles.thumb} ${isOpen ? styles.thumbHidden : ''}`}
+                priority={false}
               />
 
-              {/* Click overlay — opens modal */}
-              <button
-                className={styles.overlay}
-                onClick={() => setActive(reel)}
-                aria-label={`Watch ${reel.label} fullscreen`}
-              >
-                <span className={styles.playRing}>
-                  <svg viewBox="0 0 24 24" fill="white" width="26" height="26">
-                    <path d="M8 5v14l11-7z" />
+              {/* Gradient overlay */}
+              <div className={`${styles.cardOverlay} ${isOpen ? styles.hidden : ''}`} />
+
+              {/* Play icon — shown on hover */}
+              <span className={`${styles.playBtn} ${isOpen ? styles.hidden : ''}`}>
+                <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+
+              {/* Label */}
+              <span className={`${styles.cardLabel} ${isOpen ? styles.hidden : ''}`}>
+                {reel.label}
+              </span>
+
+              {/* iframe — plays in the same card size, no expansion */}
+              {isOpen && (
+                <div className={styles.embedClip}>
+                  <iframe
+                    src={`https://www.instagram.com/reel/${reel.id}/embed/?autoplay=1&cr=1&v=14`}
+                    className={styles.embedFrame}
+                    frameBorder="0"
+                    scrolling="no"
+                    allowTransparency="true"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    title={reel.label}
+                  />
+                </div>
+              )}
+
+              {/* Close button — only when playing */}
+              {isOpen && (
+                <button
+                  className={styles.closeBtn}
+                  onClick={handleClose}
+                  aria-label="Close reel"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="15" height="15">
+                    <path d="M18 6L6 18M6 6l12 12" />
                   </svg>
-                </span>
-              </button>
+                </button>
+              )}
             </div>
-          ))}
-        </div>
+          );
+        })}
+      </div>
 
-        {/* Follow CTA */}
-        <a
-          href={INSTA_PROFILE}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.ctaBtn}
-        >
-          <IgIcon size={16} />
-          Follow on Instagram
-        </a>
-      </section>
-
-      {/* Modal */}
-      {active && (
-        <div
-          className={styles.backdrop}
-          onClick={(e) => e.target === e.currentTarget && setActive(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className={styles.modal}>
-            <button className={styles.closeBtn} onClick={() => setActive(null)} aria-label="Close">
-              ✕
-            </button>
-            <div className={styles.phoneFrame}>
-              <div className={styles.phoneScreen}>
-                <iframe
-                  src={`${active.url}embed/`}
-                  className={styles.modalEmbed}
-                  frameBorder="0"
-                  scrolling="no"
-                  allowTransparency="true"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  title={active.label}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+      <a
+        href={INSTA_PROFILE}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.ctaBtn}
+      >
+        <IgIcon size={15} /> Follow on Instagram
+      </a>
+    </section>
   );
 }
 

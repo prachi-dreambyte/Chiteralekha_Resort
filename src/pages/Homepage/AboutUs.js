@@ -92,7 +92,6 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-
       {/* ── Where Adventure Beckons ─────────────────────── */}
       <div className={styles.whySection} ref={whyRef}>
         <div className={styles.whyTextBlock}>

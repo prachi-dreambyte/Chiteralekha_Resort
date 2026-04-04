@@ -1,0 +1,133 @@
+.section {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Grid: 3 equal columns, full width ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  min-height: 520px;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  cursor: pointer;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+/* ── Background image ── */
+.image {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dark gradient overlay ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 30, 15, 0.5) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* ── Text content ── */
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.content::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 68, 61, 0.93);
+  filter: blur(55.2px);
+  z-index: 0;
+}
+
+.content > * {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 29px;
+  font-weight: 700;
+  color: #c9a84c;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 40px rgba(254, 220, 132, 0.6), 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.description {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 260px;
+}
+
+/* ── Discover More button ── */
+.btn {
+  margin-top: 0.5rem;
+  padding: 0.55rem 1.6rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  background: transparent;
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+/* ── Divider between cards ── */
+.card + .card {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .card {
+    min-height: 380px;
+  }
+
+  .card + .card {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}

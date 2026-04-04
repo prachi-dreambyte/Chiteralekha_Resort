@@ -1,0 +1,162 @@
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section: two-column layout ── */
+.section {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(160deg, #0c0a06 0%, #1a1208 60%, #0c0a06 100%);
+}
+
+/* ── Left: normal flow, scrolls with page ── */
+.leftPanel {
+  flex: 0 0 50%;
+  padding: 90px 5vw 90px 6vw;
+  background-color: #f5f0e8;
+}
+
+/* ── Header ── */
+.header {
+ padding-top: 70px;
+ text-align: center;
+  animation: fadeUp 0.7s ease both;
+}
+
+.eyebrow {
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #000;
+  margin: 0 0 0.9rem;
+}
+
+.heading {
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 600;
+  color: #45583a;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  text-shadow: 0 0 40px rgba(254, 220, 132, 0.3);
+}
+
+.sub {
+  font-size: 20px;
+  color: goldenrod;
+  line-height: 1.8;
+  margin: 0;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+/* ── Facilities list ── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Single item ── */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item:hover {
+  background: rgba(200, 121, 65, 0.06);
+  padding-left: 0.5rem;
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.25s ease, padding-left 0.25s ease;
+}
+
+/* ── Icon ── */
+.itemIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 121, 65, 0.12);
+  border-radius: 8px;
+}
+
+/* ── Label ── */
+.itemLabel {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+/* ── Right: sticky image panel ── */
+.rightPanel {
+  flex: 0 0 50%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.stickyImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(12, 10, 6, 0.55) 0%,
+    rgba(12, 10, 6, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .section {
+    flex-direction: column;
+  }
+
+  .leftPanel {
+    flex: none;
+    width: 100%;
+    padding: 60px 6vw;
+  }
+
+  .rightPanel {
+    flex: none;
+    width: 100%;
+    position: relative;
+    height: 380px;
+    top: 0;
+  }
+}

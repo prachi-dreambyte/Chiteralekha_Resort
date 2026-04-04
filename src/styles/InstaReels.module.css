@@ -1,35 +1,28 @@
-/* ── Keyframes ─────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes backdropIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes modalPop {
-  from { opacity: 0; transform: scale(0.88) translateY(30px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* ── Section ───────────────────────────────────────── */
 .section {
-  padding: 80px 2rem 70px;
-  background: linear-gradient(170deg, #0e0b07 0%, #1c1409 55%, #0e0b07 100%);
+  padding: 80px 0 70px;
+  background: linear-gradient(160deg, #0c0a06 0%, #1a1208 60%, #0c0a06 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 80px;
+  gap: 2.5rem;
+  overflow: hidden;
 }
 
 /* ── Header ────────────────────────────────────────── */
 .header {
   text-align: center;
+  padding: 0 1.5rem;
   animation: fadeUp 0.7s ease both;
 }
 
 .eyebrow {
-  font-size: 60px;
+  font-size: 0.68rem;
   letter-spacing: 5px;
   text-transform: uppercase;
   color: #c87941;
@@ -40,94 +33,186 @@
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   color: #fff;
-  margin: 0;
+  margin: 0 0 0.4rem;
   line-height: 1.1;
 }
 
-/* ── Grid — 5 equal columns ────────────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
+.sub {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+/* ── Strip ─────────────────────────────────────────── */
+.strip {
+  display: flex;
+  gap: 16px;
+  padding: 8px 40px 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   width: 100%;
-  /* max-width: 1200px; */
+  max-width: 1200px;
+  justify-content: center;
   animation: fadeUp 0.8s ease 0.15s both;
 }
+.strip::-webkit-scrollbar { display: none; }
 
 /* ── Card ──────────────────────────────────────────── */
 .card {
   position: relative;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+  width: 200px;
+  height: 356px;
   border-radius: 20px;
   overflow: hidden;
-  /* 9:16 portrait */
-  aspect-ratio: 9 / 16;
   background: #111;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease;
-}
-
-.card:hover {
-  transform: translateY(-8px) scale(1.025);
-  box-shadow: 0 24px 56px rgba(200,121,65,0.28);
-}
-
-/* ── Embedded reel ─────────────────────────────────── */
-.embed {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
   border: none;
-  /* Instagram embed has white bg — scale up to hide chrome */
-  transform: scale(1.02);
-  pointer-events: none; /* overlay handles clicks */
-}
-
-/* ── Click overlay ─────────────────────────────────── */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  border: none;
+  padding: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-  z-index: 2;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
 }
 
-.overlay:hover {
-  background: rgba(0,0,0,0.28);
+/* Hover lift — only when NOT playing */
+.card:hover:not(.cardOpen) {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 24px 56px rgba(200, 121, 65, 0.3);
 }
 
-/* ── Play ring ─────────────────────────────────────── */
-.playRing {
-  width: 56px;
-  height: 56px;
+/* Playing state — golden ring, no lift */
+.cardOpen {
+  cursor: default;
+  box-shadow: 0 0 0 2px #c87941, 0 16px 48px rgba(200, 121, 65, 0.35);
+  transform: none !important;
+}
+
+/* ── Thumbnail ─────────────────────────────────────── */
+.thumb {
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.card:hover:not(.cardOpen) .thumb {
+  transform: scale(1.07);
+}
+
+.thumbHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Overlay ───────────────────────────────────────── */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* ── Play button ───────────────────────────────────── */
+.playBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.75);
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  background: rgba(200,121,65,0.9);
+  background: rgba(200, 121, 65, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transform: scale(0.7);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 20px rgba(200,121,65,0.6);
-  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 20px rgba(200, 121, 65, 0.6);
+  pointer-events: none;
 }
 
-.overlay:hover .playRing {
+.card:hover .playBtn {
   opacity: 1;
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* ── CTA button ────────────────────────────────────── */
+/* ── Card label ────────────────────────────────────── */
+.cardLabel {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: left;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* ── Utility: hide overlay / label / play when open ── */
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* ── Close button ──────────────────────────────────── */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.closeBtn:hover {
+  background: #c87941;
+  border-color: #c87941;
+  transform: scale(1.12);
+}
+
+/* ── Embed clip — fills the card exactly ──────────── */
+.embedClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+}
+
+/*
+  The Instagram embed adds ~56px header at top and ~110px footer.
+  We make the iframe taller and shift it up to crop both.
+  Card height = 356px → iframe height = 356 + 56 + 110 = ~522px
+  Then margin-top: -56px pulls the header out of view.
+  The card's overflow:hidden clips the footer at the bottom.
+*/
+.embedFrame {
+  width: 100%;
+  height: calc(100% + 170px);
+  margin-top: -56px;
+  border: none;
+  display: block;
+}
+
+/* ── CTA ───────────────────────────────────────────── */
 .ctaBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.8rem 2.2rem;
+  padding: 0.78rem 2.2rem;
   border-radius: 50px;
   background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
   color: #fff;
@@ -135,128 +220,23 @@
   font-weight: 600;
   letter-spacing: 0.4px;
   text-decoration: none;
-  box-shadow: 0 6px 28px rgba(220,39,67,0.35);
+  box-shadow: 0 6px 28px rgba(220, 39, 67, 0.35);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: fadeUp 0.8s ease 0.35s both;
+  animation: fadeUp 0.8s ease 0.3s both;
 }
 
 .ctaBtn:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 14px 36px rgba(220,39,67,0.5);
-}
-
-/* ══════════════════════════════════════════════════════
-   MODAL
-══════════════════════════════════════════════════════ */
-.backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  animation: backdropIn 0.25s ease;
-}
-
-.modal {
-  position: relative;
-  animation: modalPop 0.38s cubic-bezier(0.34,1.56,0.64,1);
-}
-
-.closeBtn {
-  position: absolute;
-  top: -16px;
-  right: -16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #1a1208;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-  transition: background 0.2s, color 0.2s, transform 0.2s;
-}
-
-.closeBtn:hover {
-  background: #c87941;
-  color: #fff;
-  transform: scale(1.12);
-}
-
-/* ── Phone frame ───────────────────────────────────── */
-.phoneFrame {
-  width: 340px;
-  background: #111;
-  border-radius: 44px;
-  padding: 14px;
-  box-shadow:
-    0 0 0 2px #2a2a2a,
-    0 40px 100px rgba(0,0,0,0.8),
-    inset 0 0 0 1px rgba(255,255,255,0.05);
-}
-
-.phoneFrame::before {
-  content: '';
-  display: block;
-  width: 72px;
-  height: 5px;
-  background: #2a2a2a;
-  border-radius: 3px;
-  margin: 0 auto 12px;
-}
-
-.phoneScreen {
-  border-radius: 30px;
-  overflow: hidden;
-  aspect-ratio: 9 / 16;
-  background: #000;
-}
-
-.modalEmbed {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
+  box-shadow: 0 14px 36px rgba(220, 39, 67, 0.5);
 }
 
 /* ── Responsive ────────────────────────────────────── */
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .grid .card:nth-child(4),
-  .grid .card:nth-child(5) {
-    display: none;
-  }
+@media (max-width: 768px) {
+  .section { padding: 60px 0 60px; gap: 2rem; }
+  .strip   { padding: 8px 20px 16px; justify-content: flex-start; }
+  .card    { width: 160px; height: 284px; }
 }
 
-@media (max-width: 640px) {
-  .section {
-    padding: 60px 1rem 60px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid .card:nth-child(3),
-  .grid .card:nth-child(4),
-  .grid .card:nth-child(5) {
-    display: none;
-  }
-
-  .phoneFrame {
-    width: 290px;
-  }
+@media (max-width: 480px) {
+  .card { width: 145px; height: 258px; }
 }

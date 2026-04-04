@@ -39,7 +39,7 @@ export default function Header() {
           <Link href="/accommodation" className={`${styles.link} ${pathname === '/accommodation' ? styles.active : ''}`} onClick={() => setMenuOpen(false)}>
             Accommodation
           </Link>
-          <Link href="/contact" className={`${styles.link} ${pathname === '/contact' ? styles.active : ''}`} onClick={() => setMenuOpen(false)}>
+          <Link href="/ContactPage" className={`${styles.link} ${pathname === '/ContactPage' ? styles.active : ''}`} onClick={() => setMenuOpen(false)}>
             Contact
           </Link>
         </nav>
