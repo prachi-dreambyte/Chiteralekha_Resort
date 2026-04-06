@@ -15,14 +15,15 @@ const images = [
 export default function Gallery() {
   return (
     <section className={styles.section}>
-      {/* Top row: image | text | image */}
+        <h1 className={styles.eyebrow}>Our Gallery</h1>
+      <div className='container'>
+         {/* Top row: image | text | image */}
       <div className={styles.topRow}>
         <div className={styles.imgWrap}>
           <Image src={images[0].src} alt={images[0].alt} fill sizes="25vw" className={styles.img} />
         </div>
 
         <div className={styles.centerText}>
-          <p className={styles.eyebrow}>Our Gallery</p>
           <h2 className={styles.heading}>Moments In A Frame</h2>
           <p className={styles.sub}>
             A visual journey of luxury, serenity, and unforgettable moments.
@@ -44,6 +45,8 @@ export default function Gallery() {
           </div>
         ))}
       </div>
+      </div>
+     
     </section>
   );
 }

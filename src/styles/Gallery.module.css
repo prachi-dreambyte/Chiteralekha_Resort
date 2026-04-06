@@ -1,6 +1,6 @@
 .section {
   background: #fff;
-  padding: 0;
+  padding: 70px 0px;
   width: 100%;
   overflow: hidden;
 }
@@ -24,6 +24,7 @@
 .img {
   object-fit: cover;
   transition: transform 0.5s ease;
+  border-radius: 25px;
 }
 
 /* ── Center text block ── */
@@ -39,11 +40,16 @@
 }
 
 .eyebrow {
-  font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #8a7a5a;
+  color: #daa520;
   margin: 0;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 60px;
+    animation: .6s .1s forwards AboutUs-module__OlJC1a__fadeUp;
 }
 
 .heading {
@@ -70,7 +76,7 @@
   border: 1.5px solid #8a7a5a;
   border-radius: 50px;
   background: transparent;
-  color: #5a4a2a;
+  color: #daa520;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -78,7 +84,7 @@
 }
 
 .btn:hover {
-  background: #8a7a5a;
+  background: #daa520;
   color: #fff;
 }
 
@@ -87,6 +93,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   min-height: 260px;
+  gap:10px;
 }
 
 .imgWrapBottom {

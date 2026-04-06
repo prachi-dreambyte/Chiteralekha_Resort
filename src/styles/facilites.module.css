@@ -8,46 +8,47 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
-  background: linear-gradient(160deg, #0c0a06 0%, #1a1208 60%, #0c0a06 100%);
+  background: #fff;
 }
 
 /* ── Left: normal flow, scrolls with page ── */
 .leftPanel {
   flex: 0 0 50%;
-  padding: 90px 5vw 90px 6vw;
-  background-color: #f5f0e8;
+  padding: 60px 5vw 90px 6vw;
+  background-color: #fff;
 }
 
 /* ── Header ── */
 .header {
- padding-top: 70px;
- text-align: center;
+  padding-top: 70px;
+  text-align: center;
   animation: fadeUp 0.7s ease both;
+  background: #fff;
 }
 
 .eyebrow {
   font-size: 18px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #000;
-  margin: 0 0 0.9rem;
+  color: #b8860b;
+  margin: 0 0 0.8rem;
 }
 
 .heading {
   font-size: clamp(1.8rem, 2.8vw, 2.6rem);
   font-weight: 600;
-  color: #45583a;
+  color: #465b3c;
   font-family: Georgia, 'Times New Roman', serif;
   margin: 0 0 1rem;
   line-height: 1.2;
-  text-shadow: 0 0 40px rgba(254, 220, 132, 0.3);
 }
 
 .sub {
-  font-size: 20px;
-  color: goldenrod;
+  font-size: 15px;
+  color: #777;
   line-height: 1.8;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 580px;
   text-align: center;
   padding-bottom: 50px;
 }
@@ -62,20 +63,27 @@
   gap: 0;
 }
 
-/* ── Single item ── */
+/* ── Single item: icon top, label, desc stacked ── */
 .item {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-direction: column;
+  align-items:center;
+  padding: 50px 0px;
+  border-bottom: 1px solid #f0ebe0;
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    background 0.3s ease,
+    padding-left 0.3s ease,
+    box-shadow 0.3s ease;
+  border-radius: 10px;
+  cursor: default;
 }
 
 .item:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid #f0ebe0;
 }
 
 .item.visible {
@@ -84,29 +92,55 @@
 }
 
 .item:hover {
-  background: rgba(200, 121, 65, 0.06);
-  padding-left: 0.5rem;
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.25s ease, padding-left 0.25s ease;
+  background: #fff8ee;
+  padding-left: 1.6rem;
+  box-shadow: inset 4px 0 0 #c8973a;
+}
+
+/* ── Oval icon container ── */
+.iconWrap {
+  width: 60px;
+  height: 74px;
+  border-radius: 50px;
+  background: #c8973a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.item:hover .iconWrap {
+  background: #a87830;
+  transform: scale(1.08) translateY(-3px);
 }
 
 /* ── Icon ── */
 .itemIcon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(200, 121, 65, 0.12);
-  border-radius: 8px;
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
 /* ── Label ── */
 .itemLabel {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.4;
+  font-size: 25px;
+  font-family: Georgia, 'Times New Roman', serif;
+  color:#465b3c;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  transition: color 0.3s ease;
+}
+
+.item:hover .itemLabel {
+  color: #a87830;
+}
+
+/* ── Description ── */
+.itemDesc {
+  font-size: 18px;
+  color: #888;
+  line-height: 1.65;
+  max-width: 340px;
 }
 
 /* ── Right: sticky image panel ── */
@@ -116,6 +150,7 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
+  padding: 100px 0px 20px 0px;
 }
 
 .stickyImage {
@@ -127,6 +162,7 @@
 .img {
   object-fit: cover;
   object-position: center;
+  border-radius: 20px;
 }
 
 .imgOverlay {
@@ -134,9 +170,8 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(12, 10, 6, 0.55) 0%,
-    rgba(12, 10, 6, 0.1) 50%,
-    transparent 100%
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 60%
   );
 }
 
@@ -158,5 +193,9 @@
     position: relative;
     height: 380px;
     top: 0;
+  }
+
+  .itemDesc {
+    max-width: 100%;
   }
 }

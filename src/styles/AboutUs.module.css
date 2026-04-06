@@ -11,7 +11,8 @@
 
 /* ── Section wrapper ───────────────────────────────── */
 .section {
-  background: #f8f9f5;
+  /* background: #f8f9f5; */
+  background-image: url("/assets/images/back3.png");
   padding: 60px 40px;
   overflow: hidden;
 }
@@ -27,7 +28,7 @@
   font-size: 60px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: #465b3c;
+  color: #a24c36;
   margin-bottom: 15px;
   opacity: 0;
   animation: fadeUp 0.6s ease 0.1s forwards;
@@ -36,26 +37,18 @@
 
 /* ── Heading ───────────────────────────────────────── */
 .heading {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 30px;
   font-weight: 700;
   color: #1a2614;
   line-height: 1.15;
   margin-bottom: 0;
   opacity: 0;
   animation: fadeUp 0.7s ease 0.25s forwards;
+  padding-bottom: 25px;
 }
 
 .accent {
   color: #465b3c;
-}
-
-.divider {
-  height: 2px;
-  background: #465b3c;
-  border-radius: 2px;
-  margin: 1.25rem 0 2rem;
-  width: 0;
-  animation: drawLine 0.6s ease 0.5s forwards;
 }
 
 /* ── Two-column layout ─────────────────────────────── */
@@ -70,7 +63,7 @@
 
 /* ── Left: text side ───────────────────────────────── */
 .textSide p {
-  font-size: 23px;
+  font-size: 20px;
   color: #4a5e3a;
   line-height: 1.85;
   margin-bottom: 1.25rem;
@@ -82,10 +75,10 @@
 
 .ctaBtn {
   display: inline-block;
-  padding: 25px;
+  padding: 18px;
   background: #465b3c;
   color: #fff;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -194,7 +187,7 @@
   margin-top: 6rem;
   background: #f5f0e8;
   border-radius: 16px;
-  padding: 30px 220px;
+  padding: 100px 220px;
   overflow: hidden;
   text-align: center;
 }
@@ -206,14 +199,16 @@
 
 .whyHeading {
   font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 900;
-  color: #1a2614;
+  font-weight:400;
+  color: #a24c36;
+   text-transform: uppercase;
   line-height: 1.05;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+  padding-bottom: 20px;
 }
 
 .whyEyebrow {
@@ -229,9 +224,8 @@
 }
 
 .whyBody {
-  font-size: 0.95rem;
+  font-size: 17px;
   color: #5a6e4a;
-  max-width: 420px;
   margin: 0 auto;
   line-height: 1.8;
   opacity: 0;
@@ -290,7 +284,7 @@
 
 .whyPanelName {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 5rem;
   left: 1.25rem;
   font-family: 'Georgia', serif;
   font-style: italic;
@@ -304,6 +298,24 @@
 }
 
 .whyPanel:hover .whyPanelName {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carddescription {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  font-size: 18px;
+  color: #f0f0f0;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+}
+
+.whyPanel:hover .carddescription {
   opacity: 1;
   transform: translateY(0);
 }

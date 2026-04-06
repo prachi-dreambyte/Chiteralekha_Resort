@@ -4,17 +4,23 @@ import Rooms from '@/pages/Homepage/Rooms';
 import GuestReviews from '@/pages/Homepage/GuestReviews';
 import InstaReels from '@/pages/Homepage/InstaReels';
 import Facilites from '@/pages/Homepage/Facilites';
+import Gallery from '@/pages/Homepage/Gallery';
+import Booking from '@/pages/Homepage/Booking';
+import WhyChiteralekha from '@/pages/Homepage/WhyChitralekha';
 
 export default function Home() {
   return (
     <>
       <Hero />
       <AboutUs />
+      <WhyChiteralekha/>
       <GuestReviews />
-      <Rooms />
       <InstaReels />
+      <Rooms />
       <Facilites />
-      {/* <div className={styles.content}>
+      <Gallery/>
+      <Booking/>
+      {/* <div s={styles.content}>
         <div className={styles.container}>
           <ScrollReveal>
             <h2 className={styles.sectionTitle}>Welcome to Chitralekha Boutique Resort</h2>

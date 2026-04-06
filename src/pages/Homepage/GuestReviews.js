@@ -122,7 +122,7 @@ export default function GuestReviews() {
         {/* Header row */}
         <div className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>06 &nbsp;·&nbsp; Clients Feedback</p>
+            <p className={styles.eyebrow}>Clients Feedback</p>
             <h2 className={styles.heading}>What Our Customers Says</h2>
           </div>
           <div className={styles.navBtns}>

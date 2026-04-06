@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import styles from '../../styles/Rooms.module.css';
+import Link from 'next/link';
 
 const rooms = [
   {
@@ -38,7 +39,7 @@ export default function Rooms() {
             <div className={styles.content}>
               <h2 className={styles.title}>{room.title}</h2>
               <p className={styles.description}>{room.description}</p>
-              <button className={styles.btn}>Discover More</button>
+              <Link href="/RoomsPage" className={styles.bookBtn}><button className={styles.btn}>Discover More</button></Link> 
             </div>
           </div>
         ))}

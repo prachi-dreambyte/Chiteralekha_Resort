@@ -1,242 +1,471 @@
-@keyframes fadeUp {
+/* ── Google Fonts ── */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ── CSS Variables ── */
+.page {
+  --ig-gradient: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  --color-bg:        #0a0a0a;
+  --color-surface:   #111111;
+  --color-border:    rgba(255, 255, 255, 0.08);
+  --color-text:      #f0ece4;
+  --color-muted:     rgba(240, 236, 228, 0.45);
+  --color-accent:    #e6683c;
+  --font-display:    "Bebas Neue", sans-serif;
+  --font-body:       "DM Sans", sans-serif;
+  --radius-card:     22px;
+  --radius-modal:    26px;
+  --shadow-card:     0 6px 28px rgba(0, 0, 0, 0.55);
+  --shadow-card-hover: 0 28px 64px rgba(0, 0, 0, 0.75);
+  --transition-base: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ═══════════════════════════════════════════
+   PAGE SHELL
+═══════════════════════════════════════════ */
+.page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  padding: 80px 0 110px;
+  overflow: hidden;
+}
+
+/* ── Ambient blobs ── */
+.blobLeft,
+.blobRight {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.blobLeft {
+  width: 600px;
+  height: 500px;
+  top: -80px;
+  left: -160px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(220, 39, 67, 0.22) 0%,
+    transparent 70%
+  );
+}
+
+.blobRight {
+  width: 600px;
+  height: 500px;
+  bottom: -80px;
+  right: -160px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(188, 24, 136, 0.18) 0%,
+    transparent 70%
+  );
+}
+
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
+.header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.eyebrowDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 1.7s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;  transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(1.7); }
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 9vw, 100px);
+  letter-spacing: 5px;
+  line-height: 1;
+  margin: 0 0 16px;
+  background: linear-gradient(135deg, #ffffff 35%, #e6683c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-muted);
+  letter-spacing: 0.4px;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════
+   GRID
+═══════════════════════════════════════════ */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 14px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   REEL CARD
+═══════════════════════════════════════════ */
+.card {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 9 / 16;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  /* staggered entry animation */
+  animation: cardIn 0.6s ease both;
+  animation-delay: var(--delay, 0s);
+  outline: none;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-10px) scale(1.025);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@keyframes cardIn {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Section ───────────────────────────────────────── */
-.section {
-  padding: 80px 0 70px;
-  background: linear-gradient(160deg, #0c0a06 0%, #1a1208 60%, #0c0a06 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-  overflow: hidden;
+/* Index number (top-left) */
+.cardIndex {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 3;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1;
 }
 
-/* ── Header ────────────────────────────────────────── */
-.header {
-  text-align: center;
-  padding: 0 1.5rem;
-  animation: fadeUp 0.7s ease both;
-}
-
-.eyebrow {
-  font-size: 0.68rem;
-  letter-spacing: 5px;
+/* Tag pill (below index) */
+.cardTag {
+  position: absolute;
+  top: 34px;
+  left: 16px;
+  z-index: 3;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #c87941;
-  margin-bottom: 0.6rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px 9px;
 }
 
-.heading {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 0.4rem;
-  line-height: 1.1;
-}
-
-.sub {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
-  margin: 0;
-}
-
-/* ── Strip ─────────────────────────────────────────── */
-.strip {
-  display: flex;
-  gap: 16px;
-  padding: 8px 40px 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+/* Video */
+.cardVideo {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 1200px;
-  justify-content: center;
-  animation: fadeUp 0.8s ease 0.15s both;
-}
-.strip::-webkit-scrollbar { display: none; }
-
-/* ── Card ──────────────────────────────────────────── */
-.card {
-  position: relative;
-  flex-shrink: 0;
-  scroll-snap-align: center;
-  width: 200px;
-  height: 356px;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #111;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
-}
-
-/* Hover lift — only when NOT playing */
-.card:hover:not(.cardOpen) {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 24px 56px rgba(200, 121, 65, 0.3);
-}
-
-/* Playing state — golden ring, no lift */
-.cardOpen {
-  cursor: default;
-  box-shadow: 0 0 0 2px #c87941, 0 16px 48px rgba(200, 121, 65, 0.35);
-  transform: none !important;
-}
-
-/* ── Thumbnail ─────────────────────────────────────── */
-.thumb {
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease, opacity 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
-.card:hover:not(.cardOpen) .thumb {
+.card:hover .cardVideo {
   transform: scale(1.07);
 }
 
-.thumbHidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ── Overlay ───────────────────────────────────────── */
+/* Gradient overlay */
 .cardOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.12) 0%,
+    rgba(0, 0, 0, 0.0) 38%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
 }
 
-/* ── Play button ───────────────────────────────────── */
-.playBtn {
+/* Instagram badge (top-right) */
+.cardIgBadge {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.75);
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: rgba(200, 121, 65, 0.92);
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--ig-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 20px rgba(200, 121, 65, 0.6);
-  pointer-events: none;
+  color: white;
 }
 
-.card:hover .playBtn {
+/* Play ring (center) */
+.cardPlayRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.07);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cardPlayRingVisible {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* ── Card label ────────────────────────────────────── */
+/* Footer */
+.cardFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 20px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .cardLabel {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  right: 14px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #fff;
-  text-align: left;
-  letter-spacing: 0.3px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  line-height: 1.1;
 }
 
-/* ── Utility: hide overlay / label / play when open ── */
-.hidden {
-  opacity: 0 !important;
-  pointer-events: none;
+.cardCta {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
-/* ── Close button ──────────────────────────────────── */
-.closeBtn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  cursor: pointer;
+.card:hover .cardCta {
+  color: var(--color-accent);
+}
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
 }
 
-.closeBtn:hover {
-  background: #c87941;
-  border-color: #c87941;
-  transform: scale(1.12);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* ── Embed clip — fills the card exactly ──────────── */
-.embedClip {
-  position: absolute;
-  inset: 0;
+.modalBox {
+  position: relative;
+  width: min(370px, 90vw);
+  border-radius: var(--radius-modal);
   overflow: hidden;
-  border-radius: 20px;
-  background: #000;
+  background: #0f0f0f;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85);
+  animation: modalIn 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/*
-  The Instagram embed adds ~56px header at top and ~110px footer.
-  We make the iframe taller and shift it up to crop both.
-  Card height = 356px → iframe height = 356 + 56 + 110 = ~522px
-  Then margin-top: -56px pulls the header out of view.
-  The card's overflow:hidden clips the footer at the bottom.
-*/
-.embedFrame {
-  width: 100%;
-  height: calc(100% + 170px);
-  margin-top: -56px;
-  border: none;
-  display: block;
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.88) translateY(24px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
 }
 
-/* ── CTA ───────────────────────────────────────────── */
-.ctaBtn {
-  display: inline-flex;
+/* Close button */
+.modalClose {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.78rem 2.2rem;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  color: #fff;
-  font-size: 0.88rem;
-  font-weight: 600;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modalClose:hover {
+  background: rgba(220, 39, 67, 0.7);
+}
+
+/* Instagram link */
+.modalIgLink {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ig-gradient);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.4px;
   text-decoration: none;
-  box-shadow: 0 6px 28px rgba(220, 39, 67, 0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: fadeUp 0.8s ease 0.3s both;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.ctaBtn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 14px 36px rgba(220, 39, 67, 0.5);
+.modalIgLink:hover {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
 
-/* ── Responsive ────────────────────────────────────── */
-@media (max-width: 768px) {
-  .section { padding: 60px 0 60px; gap: 2rem; }
-  .strip   { padding: 8px 20px 16px; justify-content: flex-start; }
-  .card    { width: 160px; height: 284px; }
+.modalIgLink span {
+  display: none;
 }
 
-@media (max-width: 480px) {
-  .card { width: 145px; height: 258px; }
+@media (min-width: 480px) {
+  .modalIgLink span { display: inline; }
+}
+
+/* Video */
+.modalVideo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════
+   FOLLOW STRIP
+═══════════════════════════════════════════ */
+.followStrip {
+  position: relative;
+  z-index: 1;
+  margin-top: 72px;
+  text-align: center;
+}
+
+.followBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  border-radius: 999px;
+  background: var(--ig-gradient);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(220, 39, 67, 0.38);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.followBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(220, 39, 67, 0.55);
+  color: white;
 }
