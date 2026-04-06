@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from '@/styles/RoomsPage.module.css';
 import SearchBar from '../checkIN_OutForm/checkIN_OutForm';
@@ -113,10 +114,10 @@ function RoomCard({ room }) {
 
           {/* Check Availability CTA */}
           <div className={styles.ctaWrap}>
-            <button className={styles.ctaBtn}>
+            <Link href="/room-details" className={styles.ctaBtn}>
               <span className={styles.ctaIcon}>↗</span>
               CHECK AVAILABILITY
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -281,6 +282,21 @@ export default function RoomsPage() {
               >›</button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ── CTA Banner ── */}
+      <section className={styles.ctaBanner}>
+        <div className={styles.ctaBannerOverlay} />
+        <div className={styles.ctaBannerContent}>
+          <h2 className={styles.ctaBannerTitle}>
+            Feel The City Vibe<br />Experience Life In Motion
+          </h2>
+          <p className={styles.ctaBannerSub}>
+            Book today to indulge in unparalleled luxury and serene surroundings. Experience tranquility like never before<br />
+            with our exclusive reservations. Your escape awaits
+          </p>
+          <Link href="/contactUs" className={styles.ctaBannerBtn}>Reserve Now</Link>
         </div>
       </section>
     </div>

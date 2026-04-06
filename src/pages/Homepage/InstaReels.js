@@ -8,28 +8,28 @@ const REELS = [
   {
     id: 1,
     url: "https://www.instagram.com/reel/DQVtnhJjiAw",
-    videoSrc: "/image/Dream/video1.mp4",
+    videoSrc: "/assets/videos/video1.mp4",
     label: "Behind the Lens",
     tag: "Product Shoot",
   },
   {
     id: 2,
     url: "https://www.instagram.com/reel/DQbxeIXDjh5",
-    videoSrc: "/image/Dream/video2.mp4",
+    videoSrc: "/assets/videos/video1.mp4",
     label: "Brand Stories",
     tag: "Ad Film",
   },
   {
     id: 3,
     url: "https://www.instagram.com/reel/DO8qfc5ASFq",
-    videoSrc: "/image/Dream/video3.mp4",
+    videoSrc: "/assets/videos/video1.mp4",
     label: "Fashion Forward",
     tag: "Model Shoot",
   },
   {
     id: 4,
     url: "https://www.instagram.com/reel/DNQZlo5hUBH",
-    videoSrc: "/image/Dream/video4.mp4",
+    videoSrc: "/assets/videos/video1.mp4",
     label: "Live Moments",
     tag: "Event",
   },
@@ -61,28 +61,22 @@ const IconExternal = () => (
 );
 
 // ── ReelCard ──────────────────────────────────────────────────────────────────
-function ReelCard({ reel, index, onClick }) {
+function ReelCard({ reel, index, onClick, isSelected }) {
   const videoRef = useRef(null);
   const [hovered, setHovered] = useState(false);
 
-  const handleMouseEnter = useCallback(() => {
-    setHovered(true);
+  // autoplay on mount
+  useEffect(() => {
     videoRef.current?.play().catch(() => {});
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    setHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  }, []);
-
+  const handleMouseEnter = useCallback(() => setHovered(true), []);
+  const handleMouseLeave = useCallback(() => setHovered(false), []);
   const handleClick = useCallback(() => onClick(reel), [onClick, reel]);
 
   return (
     <article
-      className={styles.card}
+      className={`${styles.card} ${isSelected ? styles.cardSelected : ""}`}
       style={{ "--delay": `${index * 0.1}s` }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -90,104 +84,64 @@ function ReelCard({ reel, index, onClick }) {
       role="button"
       tabIndex={0}
       aria-label={`Watch reel: ${reel.label}`}
+      aria-pressed={isSelected}
       onKeyDown={(e) => e.key === "Enter" && handleClick()}
     >
-      <span className={styles.cardIndex}>0{index + 1}</span>
-      <span className={styles.cardTag}>{reel.tag}</span>
-
       <video
         ref={videoRef}
         src={reel.videoSrc}
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         className={styles.cardVideo}
       />
-
-      <div className={styles.cardOverlay} />
-
-      <div className={styles.cardIgBadge}>
-        <IconInstagram />
-      </div>
-
-      <div
-        className={`${styles.cardPlayRing} ${
-          hovered ? styles.cardPlayRingVisible : ""
-        }`}
-      >
-        <IconPlay />
-      </div>
-
-      <footer className={styles.cardFooter}>
-        <span className={styles.cardLabel}>{reel.label}</span>
-        <span className={styles.cardCta}>Watch ↗</span>
-      </footer>
     </article>
   );
 }
 
-// ── Modal ─────────────────────────────────────────────────────────────────────
-function ReelModal({ reel, onClose }) {
+// ── Inline Player ─────────────────────────────────────────────────────────────
+function InlinePlayer({ reel, onClose }) {
   const videoRef = useRef(null);
+  const playerRef = useRef(null);
 
   useEffect(() => {
     videoRef.current?.play().catch(() => {});
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+    // scroll into view smoothly
+    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [reel]);
 
   return (
-    <div
-      className={styles.modalOverlay}
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Reel player"
-    >
-      <div
-        className={styles.modalBox}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div ref={playerRef} className={styles.inlinePlayer}>
+      <div className={styles.inlinePlayerHeader}>
         <button
-          className={styles.modalClose}
+          className={styles.inlinePlayerClose}
           onClick={onClose}
-          aria-label="Close modal"
+          aria-label="Close player"
         >
           <IconClose />
         </button>
-
         <a
           href={reel.url}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.modalIgLink}
+          className={styles.inlineIgLink}
           aria-label="Open on Instagram"
         >
           <IconInstagram />
-          <span>Instagram</span>
+          <span>View on Instagram</span>
           <IconExternal />
         </a>
-
-        <video
-          ref={videoRef}
-          src={reel.videoSrc}
-          loop
-          playsInline
-          controls
-          className={styles.modalVideo}
-        />
       </div>
+
+      <video
+        ref={videoRef}
+        src={reel.videoSrc}
+        loop
+        playsInline
+        controls
+        className={styles.inlineVideo}
+      />
     </div>
   );
 }
@@ -196,7 +150,9 @@ function ReelModal({ reel, onClose }) {
 export default function InstaReels() {
   const [selected, setSelected] = useState(null);
 
-  const handleOpen  = useCallback((reel) => setSelected(reel), []);
+  const handleOpen  = useCallback((reel) => {
+    setSelected((prev) => (prev?.id === reel.id ? null : reel));
+  }, []);
   const handleClose = useCallback(() => setSelected(null), []);
 
   return (
@@ -206,22 +162,29 @@ export default function InstaReels() {
 
       {/* Header */}
       <header className={styles.header}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowDot} />
-          Dream Byte Studio
-        </div>
         <h1 className={styles.title}>Instagram Reels</h1>
         <p className={styles.subtitle}>
-          Click any reel to watch&nbsp;&nbsp;·&nbsp;&nbsp;Tap to open on Instagram
+          Click any reel to watch&nbsp;&nbsp;·&nbsp;&nbsp;Open on Instagram
         </p>
       </header>
 
       {/* Grid */}
       <section className={styles.grid} aria-label="Reels grid">
         {REELS.map((reel, i) => (
-          <ReelCard key={reel.id} reel={reel} index={i} onClick={handleOpen} />
+          <ReelCard
+            key={reel.id}
+            reel={reel}
+            index={i}
+            onClick={handleOpen}
+            isSelected={selected?.id === reel.id}
+          />
         ))}
       </section>
+
+      {/* Inline Player */}
+      {selected && (
+        <InlinePlayer reel={selected} onClose={handleClose} />
+      )}
 
       {/* Follow CTA */}
       <div className={styles.followStrip}>
@@ -235,9 +198,6 @@ export default function InstaReels() {
           Follow us on Instagram
         </a>
       </div>
-
-      {/* Modal */}
-      {selected && <ReelModal reel={selected} onClose={handleClose} />}
     </main>
   );
 }

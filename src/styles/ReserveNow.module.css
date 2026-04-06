@@ -1,0 +1,127 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: #3b2a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 56px 80px;
+  overflow: hidden;
+}
+
+/* ── Decorative stars ── */
+.star {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 18px;
+  pointer-events: none;
+  user-select: none;
+}
+.starTL { top: 24px;  left: 220px; }
+.starTR { top: 24px;  right: 220px; }
+.starBL { bottom: 24px; left: 260px; }
+.starBR { bottom: 24px; right: 260px; }
+
+/* ── Circular images ── */
+.circle {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ── Center content ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 560px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.heading {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── CTA button ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: 1.5px solid #c8973a;
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.btn:hover {
+  background: #c8973a;
+  color: #fff;
+}
+
+.btnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .section {
+    flex-direction: column;
+    padding: 48px 24px;
+    gap: 32px;
+  }
+
+  .circleLeft,
+  .circleRight {
+    width: 120px;
+    height: 120px;
+  }
+
+  .starTL, .starTR, .starBL, .starBR {
+    display: none;
+  }
+}

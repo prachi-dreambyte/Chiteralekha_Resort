@@ -7,6 +7,8 @@ import Facilites from '@/pages/Homepage/Facilites';
 import Gallery from '@/pages/Homepage/Gallery';
 import Booking from '@/pages/Homepage/Booking';
 import WhyChiteralekha from '@/pages/Homepage/WhyChitralekha';
+import ReserveNow from '@/pages/Homepage/ReserveNow';
+import WhatsNearby from '@/pages/Homepage/WhatsNearby';
 
 export default function Home() {
   return (
@@ -15,11 +17,13 @@ export default function Home() {
       <AboutUs />
       <WhyChiteralekha/>
       <GuestReviews />
-      <InstaReels />
-      <Rooms />
       <Facilites />
-      <Gallery/>
+       <Rooms />
+      <WhatsNearby />
       <Booking/>
+      <Gallery/>
+       <InstaReels />
+      <ReserveNow />
       {/* <div s={styles.content}>
         <div className={styles.container}>
           <ScrollReveal>

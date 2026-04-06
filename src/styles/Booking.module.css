@@ -1,262 +1,145 @@
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(32px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 .section {
   width: 100%;
-  background: #fff;
-  padding: 80px 0 100px;
+  background: #f5f0e8;
+  padding: 80px 40px 100px;
+  text-align: center;
 }
 
 /* ── Header ── */
 .header {
-  text-align: center;
-  margin-bottom: 56px;
-  animation: fadeUp 0.7s ease both;
-}
-
-.eyebrow {
-  font-size: 18px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #b8860b;
-  margin: 0 0 0.8rem;
-}
-
-.heading {
-  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
-  font-weight: 600;
-  color: #465b3c;
-  font-family: Georgia, 'Times New Roman', serif;
-  margin: 0 0 1rem;
-  line-height: 1.2;
-}
-
-.sub {
-  font-size: 15px;
-  color: #777;
-  line-height: 1.8;
-  margin: 0 auto;
-  max-width: 580px;
-}
-
-/* ── Grid ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-
-/* ── Card ── */
-.card {
-  position: relative;
-  background: #fff;
-  border: 1px solid #f0ebe0;
-  border-radius: 16px;
-  padding: 40px 32px 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0;
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
-  cursor: default;
+  gap: 6px;
+  margin-bottom: 64px;
 }
 
-.card.visible {
+.eyebrowIcon {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+}
+
+.heading {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: #2c2c2c;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin: 8px 0 0;
+  line-height: 1.2;
+}
+
+/* ── Steps layout ── */
+.stepsWrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.connectorLine {
+  position: absolute;
+  top: 22px; /* aligns with badge center */
+  left: calc(12.5% + 20px);
+  right: calc(12.5% + 20px);
+  height: 1px;
+  border-top: 1.5px dashed #c8a96e;
+  z-index: 0;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Step card ── */
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.stepCard.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.card:hover {
-  box-shadow: 0 12px 40px rgba(70, 91, 60, 0.12);
-  border-color: #c8973a;
-  transform: translateY(-6px);
-}
-
-/* ── Featured card ── */
-.card.featured {
-  background: #465b3c;
-  border-color: #465b3c;
-}
-
-.card.featured .title,
-.card.featured .duration,
-.card.featured .perk,
-.card.featured .price {
-  color: #fff;
-}
-
-.card.featured .perNight {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.card.featured .perk .check {
-  color: #c8973a;
-}
-
-.card.featured:hover {
-  box-shadow: 0 12px 40px rgba(70, 91, 60, 0.35);
-  border-color: #c8973a;
-}
-
-/* ── Badge ── */
-.badge {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #c8973a;
-  color: #fff;
-  font-size: 11px;
+/* ── Step badge ── */
+.stepBadge {
+  background: #e8e0d0;
+  color: #555;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 4px 16px;
+  padding: 5px 14px;
   border-radius: 50px;
-  white-space: nowrap;
+  border: 1px solid #d4c9b0;
 }
 
-/* ── Icon wrap ── */
+/* ── Icon ── */
 .iconWrap {
-  width: 64px;
-  height: 74px;
-  border-radius: 50px;
-  background: #c8973a;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.1rem;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.card:hover .iconWrap {
-  background: #a87830;
-  transform: scale(1.08) translateY(-3px);
+.stepCard:hover .iconWrap {
+  transform: translateY(-4px);
 }
 
-.icon {
-  font-size: 1.7rem;
-  line-height: 1;
-}
-
-/* ── Title ── */
-.title {
-  font-size: 22px;
+/* ── Text ── */
+.stepTitle {
+  font-size: 18px;
   font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 600;
-  color: #465b3c;
-  margin: 0 0 0.3rem;
-  transition: color 0.3s ease;
+  font-weight: 500;
+  color: #2c2c2c;
+  margin: 0;
 }
 
-.card:not(.featured):hover .title {
-  color: #a87830;
-}
-
-/* ── Duration ── */
-.duration {
-  font-size: 13px;
-  color: #999;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0 0 1.4rem;
-}
-
-.card.featured .duration {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* ── Perks list ── */
-.perks {
-  list-style: none;
-  margin: 0 0 1.8rem;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  width: 100%;
-}
-
-.perk {
-  font-size: 14px;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-}
-
-.check {
-  color: #c8973a;
-  font-weight: 700;
-}
-
-/* ── Footer: price + button ── */
-.footer {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-.price {
-  font-size: 26px;
-  font-weight: 700;
-  color: #465b3c;
-  font-family: Georgia, 'Times New Roman', serif;
-}
-
-.perNight {
-  font-size: 13px;
-  font-weight: 400;
-  color: #999;
-  font-family: inherit;
-}
-
-/* ── Book Now button ── */
-.btn {
-  width: 100%;
-  padding: 0.7rem 1.6rem;
-  border-radius: 50px;
-  border: 1.5px solid #c8973a;
-  background: transparent;
-  color: #c8973a;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.btn:hover {
-  background: #c8973a;
-  color: #fff;
-}
-
-.card.featured .btn {
-  border-color: #fff;
-  color: #fff;
-}
-
-.card.featured .btn:hover {
-  background: #fff;
-  color: #465b3c;
+.stepDesc {
+  font-size: 13.5px;
+  color: #888;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 200px;
 }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .grid {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+
+  .connectorLine {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 60px 24px 80px;
+  }
+
+  .stepsGrid {
     grid-template-columns: 1fr;
-    max-width: 420px;
-    margin: 0 auto;
   }
 }
 

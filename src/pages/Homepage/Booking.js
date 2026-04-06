@@ -3,43 +3,70 @@
 import { useEffect, useRef } from "react";
 import styles from "@/styles/Booking.module.css";
 
-const packages = [
+const steps = [
   {
-    icon: "🌿",
-    title: "Weekend Getaway",
-    duration: "2 Nights / 3 Days",
-    price: "₹8,999",
-    perks: ["Buffet Breakfast", "Pool Access", "Mussoorie View Room"],
+    step: "STEP 01",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <path d="M32 6C22.06 6 14 14.06 14 24c0 13.5 18 34 18 34s18-20.5 18-34c0-9.94-8.06-18-18-18z" stroke="#b07d3a" strokeWidth="2" strokeLinejoin="round"/>
+        <circle cx="32" cy="24" r="6" stroke="#b07d3a" strokeWidth="2"/>
+        <path d="M20 52l-6 6M44 52l6 6" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Choose Destination",
+    desc: "Standing at the edge of a towering cliff, gazing at a vast desert under",
   },
   {
-    icon: "💍",
-    title: "Honeymoon Retreat",
-    duration: "3 Nights / 4 Days",
-    price: "₹15,999",
-    perks: ["All Meals Included", "Couple Spa", "Private Lawn Room"],
-    featured: true,
+    step: "STEP 02",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <rect x="16" y="20" width="32" height="28" rx="3" stroke="#b07d3a" strokeWidth="2"/>
+        <path d="M24 20v-4a8 8 0 0116 0v4" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M24 34h16M24 40h10" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Select Your Package",
+    desc: "Listening to the rhythmic waves of the ocean can be deeply humbling",
   },
   {
-    icon: "👨‍👩‍👧",
-    title: "Family Escape",
-    duration: "3 Nights / 4 Days",
-    price: "₹12,999",
-    perks: ["Buffet Meals", "Kids Pool", "Cycling Activity"],
+    step: "STEP 03",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <circle cx="32" cy="32" r="20" stroke="#b07d3a" strokeWidth="2"/>
+        <circle cx="32" cy="32" r="3" fill="#b07d3a"/>
+        <path d="M32 12v4M32 48v4M12 32h4M48 32h4" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M32 32l8-8" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Customize Your Itinerary",
+    desc: "These moments remind us of the planet's beauty and the importance",
+  },
+  {
+    step: "STEP 04",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <path d="M36 10c-8 2-16 10-18 22l10 10c12-2 20-10 22-18L36 10z" stroke="#b07d3a" strokeWidth="2" strokeLinejoin="round"/>
+        <circle cx="38" cy="26" r="4" stroke="#b07d3a" strokeWidth="2"/>
+        <path d="M18 32l-6 6 4 4 6-6M34 46l-4 6-4-2 2-6" stroke="#b07d3a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    title: "Book & Get Ready to Go",
+    desc: "Savoring new flavors creates memories that stay with you long after the trip",
   },
 ];
 
 export default function Booking() {
-  const cardRefs = useRef([]);
+  const stepRefs = useRef([]);
 
   useEffect(() => {
     const observers = [];
-    cardRefs.current.forEach((el) => {
+    stepRefs.current.forEach((el) => {
       if (!el) return;
       const obs = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) el.classList.add(styles.visible);
         },
-        { threshold: 0.1 }
+        { threshold: 0.15 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -49,43 +76,33 @@ export default function Booking() {
 
   return (
     <section className={styles.section}>
-      <div className="container">
-        <div className={styles.header}>
-          <p className={styles.eyebrow}>Plan Your Stay</p>
-          <h2 className={styles.heading}>Book Your Perfect Escape</h2>
-          <p className={styles.sub}>
-            Choose from our handcrafted packages designed to give you the most
-            memorable experience amidst the serene hills of Mussoorie.
-          </p>
-        </div>
+      <div className={styles.header}>
+        <span className={styles.eyebrowIcon}>
+          <svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="18">
+            <circle cx="12" cy="10" r="8" stroke="#b07d3a" strokeWidth="1.5"/>
+            <circle cx="28" cy="10" r="8" stroke="#b07d3a" strokeWidth="1.5"/>
+            <circle cx="12" cy="10" r="3" stroke="#b07d3a" strokeWidth="1.5"/>
+            <circle cx="28" cy="10" r="3" stroke="#b07d3a" strokeWidth="1.5"/>
+          </svg>
+        </span>
+        <p className={styles.eyebrow}>HOW DOES WE WORK</p>
+        <h2 className={styles.heading}>Our Booking Process</h2>
+      </div>
 
-        <div className={styles.grid}>
-          {packages.map(({ icon, title, duration, price, perks, featured }, i) => (
+      <div className={styles.stepsWrapper}>
+        <div className={styles.connectorLine} />
+        <div className={styles.stepsGrid}>
+          {steps.map(({ step, icon, title, desc }, i) => (
             <div
-              key={title}
-              className={`${styles.card} ${featured ? styles.featured : ""}`}
-              ref={(el) => (cardRefs.current[i] = el)}
-              style={{ transitionDelay: `${i * 80}ms` }}
+              key={step}
+              className={styles.stepCard}
+              ref={(el) => (stepRefs.current[i] = el)}
+              style={{ transitionDelay: `${i * 100}ms` }}
             >
-              {featured && <span className={styles.badge}>Most Popular</span>}
-              <div className={styles.iconWrap}>
-                <span className={styles.icon}>{icon}</span>
-              </div>
-              <h3 className={styles.title}>{title}</h3>
-              <p className={styles.duration}>{duration}</p>
-              <ul className={styles.perks}>
-                {perks.map((p) => (
-                  <li key={p} className={styles.perk}>
-                    <span className={styles.check}>✓</span> {p}
-                  </li>
-                ))}
-              </ul>
-              <div className={styles.footer}>
-                <span className={styles.price}>
-                  {price} <span className={styles.perNight}>/ person</span>
-                </span>
-                <button className={styles.btn}>Book Now</button>
-              </div>
+              <div className={styles.stepBadge}>{step}</div>
+              <div className={styles.iconWrap}>{icon}</div>
+              <h3 className={styles.stepTitle}>{title}</h3>
+              <p className={styles.stepDesc}>{desc}</p>
             </div>
           ))}
         </div>
