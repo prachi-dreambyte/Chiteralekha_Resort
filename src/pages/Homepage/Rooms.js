@@ -25,6 +25,7 @@ const rooms = [
 export default function Rooms() {
   return (
     <section className={styles.section}>
+      <h2 className={styles.heading}>Room Categories</h2>
       <div className={styles.grid}>
         {rooms.map((room) => (
           <div key={room.title} className={styles.card}>

@@ -67,11 +67,11 @@ export default function Facilites() {
   }, []);
 
   return (
-    <>
+    <div className={styles.bgWrapper}>
       <div className="container">
         <div className={styles.header}>
-          <p className={styles.eyebrow}>Exclusive Facilities We Provide</p>
           <h2 className={styles.heading}>Indulge in an extraordinary escape</h2>
+           <p className={styles.eyebrow}>Exclusive Facilities We Provide</p>
           <p className={styles.sub}>
             Luxury meets comfort, and every detail is thoughtfully designed to offer you a serene
             and unforgettable experience amidst the scenic charm of Mussoorie.
@@ -116,7 +116,6 @@ export default function Facilites() {
         </div>
       </section>
       </div>
-     
-    </>
+    </div>
   );
 }

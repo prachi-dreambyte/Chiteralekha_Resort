@@ -9,6 +9,7 @@ import Booking from '@/pages/Homepage/Booking';
 import WhyChiteralekha from '@/pages/Homepage/WhyChitralekha';
 import ReserveNow from '@/pages/Homepage/ReserveNow';
 import WhatsNearby from '@/pages/Homepage/WhatsNearby';
+import Faq from '@/pages/Homepage/Faq';
 
 export default function Home() {
   return (
@@ -19,10 +20,11 @@ export default function Home() {
       <GuestReviews />
       <Facilites />
        <Rooms />
-      <WhatsNearby />
       <Booking/>
       <Gallery/>
        <InstaReels />
+       <WhatsNearby />
+      <Faq />
       <ReserveNow />
       {/* <div s={styles.content}>
         <div className={styles.container}>

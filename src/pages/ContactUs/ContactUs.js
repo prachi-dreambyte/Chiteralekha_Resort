@@ -16,6 +16,23 @@ const contactDetails = {
   ],
 };
 
+const carouselImages = [
+  '/assets/images/P1094049.jpg',
+  '/assets/images/P1094073.jpg',
+  '/assets/images/P1094094.jpg',
+  '/assets/images/P1094121.jpg',
+  '/assets/images/P1094148.jpg',
+  '/assets/images/P1094160.jpg',
+  '/assets/images/P1094163.jpg',
+  '/assets/images/P1188441.JPG.jpeg',
+  '/assets/images/P1188454.JPG.jpeg',
+  '/assets/images/P1188458.JPG.jpeg',
+  '/assets/images/r1.jpg',
+  '/assets/images/r2.jpg',
+  '/assets/images/r3.jpg',
+  '/assets/images/r4.jpg',
+];
+
 export default function ContactPage() {
   const {
     register,
@@ -40,7 +57,9 @@ export default function ContactPage() {
       </div>
 
       {/* Form + Details */}
-      <section className="container py-5">
+      <section className={styles.formSection}>
+        <div className={styles.formOverlay} />
+        <div className={`container py-5 ${styles.formContent}`}>
         <div className="row g-5">
 
           {/* Left – Form */}
@@ -140,6 +159,18 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
+        </div>
+      </section>
+
+      {/* Gallery Carousel */}
+      <section className={styles.carouselSection}>
+        <div className={styles.carouselTrack}>
+          {carouselImages.concat(carouselImages).map((src, i) => (
+            <div key={i} className={styles.carouselSlide}>
+              <img src={src} alt={`Resort gallery ${(i % carouselImages.length) + 1}`} className={styles.carouselImg} />
+            </div>
+          ))}
         </div>
       </section>
 

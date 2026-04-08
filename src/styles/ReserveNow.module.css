@@ -1,11 +1,11 @@
 .section {
   position: relative;
   width: 100%;
-  background: #3b2a1a;
+  background: #F4EBE8;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 160px;
   padding: 56px 80px;
   overflow: hidden;
 }
@@ -16,7 +16,6 @@
   color: rgba(255, 255, 255, 0.25);
   font-size: 18px;
   pointer-events: none;
-  user-select: none;
 }
 .starTL { top: 24px;  left: 220px; }
 .starTR { top: 24px;  right: 220px; }
@@ -26,8 +25,8 @@
 /* ── Circular images ── */
 .circle {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -46,25 +45,26 @@
 }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: #b8860b;
   margin: 0;
 }
 
 .heading {
-  font-family: Georgia, 'Times New Roman', serif;
+  
   font-size: clamp(1.6rem, 2.8vw, 2.4rem);
   font-weight: 400;
-  color: #fff;
+   color: #5a6e4a;
+        font-family: "Paint-Brush", serif;
   margin: 0;
   line-height: 1.2;
 }
 
 .sub {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  color: #000;
   line-height: 1.8;
   margin: 0;
 }
@@ -79,7 +79,7 @@
   border-radius: 50px;
   border: 1.5px solid #c8973a;
   background: transparent;
-  color: #fff;
+  color: #000;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;

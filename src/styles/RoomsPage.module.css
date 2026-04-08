@@ -1,8 +1,8 @@
-.page {
+/* .page {
   min-height: 100vh;
   background: #fff;
   padding-top: 85px;
-}
+} */
 
 /* ── Hero Banner ── */
 .hero {
@@ -62,8 +62,8 @@
 }
 
 .resultCount {
-  font-size: 14px;
-  color: #888;
+  font-size: 18px;
+  color: #000;
   margin: 0;
 }
 
@@ -134,6 +134,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   height: 100%;
+  border: 1px solid #2d3a24;
 }
 
 .card::before {

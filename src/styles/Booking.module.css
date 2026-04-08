@@ -20,20 +20,25 @@
 }
 
 .eyebrow {
-  font-size: 11px;
+  font-size: 18px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #888;
+  color: #b8860b;
   margin: 0;
 }
 
 .heading {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 400;
-  color: #2c2c2c;
-  font-family: Georgia, 'Times New Roman', serif;
-  margin: 8px 0 0;
-  line-height: 1.2;
+     color: #5a6e4a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: .5rem;
+    padding-bottom: 20px;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-family: Paint-Brush, serif;
+    font-weight: 400;
+    line-height: 1.05;
+    transition: opacity .7s .1s, transform .7s .1s;
+    transform: translateY(30px);
 }
 
 /* ── Steps layout ── */
@@ -106,10 +111,10 @@
 
 /* ── Text ── */
 .stepTitle {
-  font-size: 18px;
+  font-size: 20px;
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: 500;
-  color: #2c2c2c;
+  color: #000;
   margin: 0;
 }
 

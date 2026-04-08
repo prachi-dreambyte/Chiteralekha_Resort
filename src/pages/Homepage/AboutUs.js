@@ -6,9 +6,9 @@ import Link from 'next/link';
 import styles from '../../styles/AboutUs.module.css';
 
 const cards = [
-  { src: '/assets/images/o9.webp', label: 'Mountain Views',   tall: true },
-  { src: '/assets/images/o6.webp', label: 'Luxury Rooms' },
-  { src: '/assets/images/o7.webp', label: 'Nature Trails' },
+  { src: '/assets/images/n2.webp', label: 'Mountain Views',   tall: true },
+  { src: '/assets/images/r1.jpg', label: 'Luxury Rooms' },
+  { src: '/assets/images/v2.jpg', label: 'Nature Trails' },
 ];
 
 const stats = [
