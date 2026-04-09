@@ -1,7 +1,6 @@
 .page {
   min-height: 100vh;
   background: #fff;
-  padding-top: 85px;
 }
 
 /* ── Hero ── */
@@ -90,7 +89,7 @@
   color: #fff !important;
   padding: 0.6rem 0.85rem !important;
   transition: border-color 0.2s, box-shadow 0.2s !important;
-  backdrop-filter: blur(4px) !important;
+  /* backdrop-filter: blur(4px) !important; */
 }
 
 .input:focus {
@@ -127,7 +126,7 @@
 /* ── Details card ── */
 .detailsCard {
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
+  /* backdrop-filter: blur(8px); */
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 2rem 1.75rem;

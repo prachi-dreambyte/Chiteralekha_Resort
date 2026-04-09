@@ -5,7 +5,7 @@ import styles from '../../styles/Hero.module.css';
 
 const slides = [
   {
-    image: '/assets/images/p1.jpg',
+    image: '/assets/images/o9.webp',
     eyebrow: 'Welcome to Chitralekha',
     titleTop: 'Discover',
     titleAccent: 'Serenity',
@@ -14,7 +14,7 @@ const slides = [
     overlay: 'rgba(0,0,0,0.35)',
   },
   {
-    image: '/assets/images/P1094049.jpg',
+    image: '/assets/images/o6.webp',
     eyebrow: 'Boutique Resort Experience',
     titleTop: 'Unwind',
     titleAccent: 'in Luxury',
@@ -23,7 +23,7 @@ const slides = [
     overlay: 'rgba(20,30,10,0.45)',
   },
   {
-    image: '/assets/images/v1.jpg',
+    image: '/assets/images/o7.webp',
     eyebrow: 'Nature & Comfort',
     titleTop: 'Breathe',
     titleAccent: 'the Wild',
@@ -32,7 +32,7 @@ const slides = [
     overlay: 'rgba(10,20,30,0.4)',
   },
   {
-    image: '/assets/images/p2.jpg',
+    image: '/assets/images/o9.webp',
     eyebrow: 'Your Perfect Getaway',
     titleTop: 'Create',
     titleAccent: 'Memories',

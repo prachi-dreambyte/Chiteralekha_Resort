@@ -6,12 +6,12 @@ import Link from 'next/link';
 import styles from '@/styles/DestinationWedding.module.css';
 
 const services = [
-  { icon: '💐', label: 'Floral Décor', desc: 'Lush floral arrangements tailored to your theme — from marigold mandaps to rose-draped arches.' },
-  { icon: '🍽️', label: 'Catering & Cuisine', desc: 'Multi-cuisine buffets and live counters crafted by our in-house chefs for every ceremony.' },
-  { icon: '📸', label: 'Photography & Film', desc: 'Cinematic coverage of every moment — candid, traditional, and aerial drone shots.' },
-  { icon: '🎶', label: 'Entertainment', desc: 'Live bands, DJs, folk performers, and choreographed sangeet nights to keep the energy alive.' },
-  { icon: '🏛️', label: 'Venue Styling', desc: 'End-to-end venue transformation with lighting, draping, and bespoke stage design.' },
-  { icon: '🚗', label: 'Guest Transfers', desc: 'Coordinated airport, railway, and inter-venue transfers for all your guests.' },
+  { label: 'Floral Décor', desc: 'Lush floral arrangements tailored to your theme — from marigold mandaps to rose-draped arches.' },
+  { label: 'Catering & Cuisine', desc: 'Multi-cuisine buffets and live counters crafted by our in-house chefs for every ceremony.' },
+  { label: 'Photography & Film', desc: 'Cinematic coverage of every moment — candid, traditional, and aerial drone shots.' },
+  { label: 'Entertainment', desc: 'Live bands, DJs, folk performers, and choreographed sangeet nights to keep the energy alive.' },
+  { label: 'Venue Styling', desc: 'End-to-end venue transformation with lighting, draping, and bespoke stage design.' },
+  { label: 'Guest Transfers', desc: 'Coordinated airport, railway, and inter-venue transfers for all your guests.' },
 ];
 
 const packages = [
@@ -141,6 +141,31 @@ export default function DestinationWedding() {
   const packageRefs = useRef([]);
   const sectionRefs = useRef([]);
   const [activeEvent, setActiveEvent] = useState('haldi');
+  const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', eventDate: '', location: '', message: '' });
+
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
+
+  function handleChange(e) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const nl = '%0A';
+    const text =
+      '*Wedding Enquiry*' + nl +
+      'Name: ' + form.firstName + ' ' + form.lastName + nl +
+      'Email: ' + form.email + nl +
+      'Phone: ' + form.phone + nl +
+      'Event Date: ' + form.eventDate + nl +
+      'Location Preference: ' + form.location + nl +
+      'Message: ' + form.message;
+    window.open('https://wa.me/917417539900?text=' + text, '_blank');
+    setShowModal(false);
+  }
 
   useEffect(() => {
     const all = [
@@ -163,7 +188,7 @@ export default function DestinationWedding() {
       {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.heroOverlay} />
-        <Image src="/assets/images/wedding.webp" alt="Destination Wedding" fill className={styles.heroImg} priority />
+        <Image src="/assets/images/n2.webp" alt="Destination Wedding" fill className={styles.heroImg} priority />
         <div className={styles.heroContent}>
           <p className={styles.heroEyebrow}>Chitralekha Boutique Resort</p>
           <h1 className={styles.heroTitle}>
@@ -204,31 +229,101 @@ export default function DestinationWedding() {
         </div>
       </section>
 
-      {/* How It Works */}
+        {/* How It Works */}
       <section className={styles.howSection}>
         <div className="container">
-          <div className={`${styles.sectionHeader} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[1] = el)}>
-            <p className={styles.eyebrow}>Simple & Seamless</p>
-            <h2 className={styles.sectionHeading}>How It Works</h2>
-          </div>
           <div className={styles.howGrid}>
-            {[
-              { step: '01', title: 'Enquire', desc: 'Share your date, guest count, and vision with our wedding team.' },
-              { step: '02', title: 'Site Visit', desc: 'Tour the venue, meet the planners, and explore decor options.' },
-              { step: '03', title: 'Customise', desc: 'We craft a bespoke package tailored to your dream wedding.' },
-              { step: '04', title: 'Celebrate', desc: 'Relax and enjoy — we handle every detail on your big day.' },
-            ].map(({ step, title, desc }, i) => (
-              <div
-                key={step}
-                className={`${styles.howCard} ${styles.fadeSection}`}
-                ref={(el) => (sectionRefs.current[2 + i] = el)}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className={styles.howStep}>{step}</div>
-                <h3 className={styles.howTitle}>{title}</h3>
-                <p className={styles.howDesc}>{desc}</p>
+            <div className={styles.howLeft}>
+              <h2 className={styles.howHeading}>How It Works</h2>
+              <div className={styles.howImageWrap}>
+                <Image
+                  src="/assets/images/weds1.webp"
+                  alt="Wedding couple"
+                  fill
+                  className={styles.howImage}
+                  sizes="40vw"
+                />
               </div>
-            ))}
+            </div>
+            <div className={styles.howRight}>
+              <div className={styles.howSteps}>
+                {[
+                  { num: '01', title: 'Share Your Dream With Us', desc: 'Share your vision, vibe, and wishlist with us. From an elegant setting and delicious catering to cozy stays for guests, we plan everything within budget to make your special day celebration done in style.' },
+                  { num: '02', title: 'Discover the Perfect Venue', desc: 'We provide you with a list of popular venues that blend perfectly with your preferences, vibe, and budget. Explore, feel the vibe, and choose the right spot.' },
+                  { num: '03', title: 'Book Your Spot', desc: 'When you pick your ideal venue, we take care of everything and let you focus on other important things, reducing your stress and worries.' },
+                  { num: '04', title: 'Let the Magic Begin', desc: 'Celebrate your special day in your style, and we ensure everything is on point as you imagined, so your occasion becomes more beautiful, idyllic, and comfortable.' },
+                ].map(({ num, title, desc }, i) => (
+                  <div key={num} className={`${styles.howStep} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[2 + i] = el)} style={{ transitionDelay: `${i * 100}ms` }}>
+                    <div className={styles.howStepNum}>{num}</div>
+                    <div className={styles.howStepContent}>
+                      <h3 className={styles.howStepTitle}>{title}</h3>
+                      <p className={styles.howStepDesc}>{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story to Tell */}
+      <section className={`${styles.storySection} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[10] = el)}>
+        <div className="container">
+          <div className={styles.storyGrid}>
+            <div className={styles.storyImage}>
+              <div className={styles.storyImageContent}>
+                <img src="/assets/images/destinationweddingbharatcouple.webp" alt="image1"/>
+              </div>
+            </div>
+            <div className={styles.storyContent}>
+              <h2 className={styles.storyHeading}>Let's Make Your Wedding a Story to Tell:</h2>
+              <p className={styles.storyHindi}>दिल की धड़कन, पहाड़ों की गवाही!</p>
+              <p className={styles.storyDescription}>
+                Nestled in the Himalayan foothills, we don't just host weddings – we craft unforgettable love stories. If you're dreaming of a destination wedding in Dehradun, here's how <span className={styles.storyHighlight}>Chitralekha Boutique Resort</span> make your big day magical:
+              </p>
+              <div className={styles.storyPoints}>
+                <div className={styles.storyPoint}>
+                  <span className={styles.storyPointIcon}>✦</span>
+                  <div>
+                    <span className={styles.storyPointTitle}>Nature's Own Mandap:</span>
+                    <span className={styles.storyPointText}>Exchange vows under a floral canopy with the Himalayas as your sacred witness and Dehradun's golden sunsets as your backdrop.</span>
+                  </div>
+                </div>
+                <div className={styles.storyPoint}>
+                  <span className={styles.storyPointIcon}>✦</span>
+                  <div>
+                    <span className={styles.storyPointTitle}>Every Detail Perfected:</span>
+                    <span className={styles.storyPointText}>From intimate pheras by a crackling firepit to grand receptions in our lush gardens, our wedding planners obsess over every moment.</span>
+                  </div>
+                </div>
+                <div className={styles.storyPoint}>
+                  <span className={styles.storyPointIcon}>✦</span>
+                  <div>
+                    <span className={styles.storyPointTitle}>Local Flavors, Global Elegance:</span>
+                    <span className={styles.storyPointText}>Serve Garhwali delicacies alongside continental fare, with our chefs creating menus that tell your unique love story.</span>
+                  </div>
+                </div>
+                <div className={styles.storyPoint}>
+                  <span className={styles.storyPointIcon}>✦</span>
+                  <div>
+                    <span className={styles.storyPointTitle}>Stress-Free Celebrations:</span>
+                    <span className={styles.storyPointText}>Our dedicated team handles everything – décor, music, rituals – so you can simply soak in each precious moment.</span>
+                  </div>
+                </div>
+                <div className={styles.storyPoint}>
+                  <span className={styles.storyPointIcon}>✦</span>
+                  <div>
+                    <span className={styles.storyPointTitle}>Memories That Last:</span>
+                    <span className={styles.storyPointText}>Bonfire sangeets under starry skies, morning chai with mountain views, and cozy cottages for your family – we create experiences, not just events.</span>
+                  </div>
+                </div>
+              </div>
+              <p className={styles.storyFinal}>
+                Yes, your love deserves this Himalayan fairytale like destination wedding in Dehradun.
+              </p>
+              <Link href="/contactUs" className={styles.storyBtn}>Contact For My Special Day</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -241,19 +336,44 @@ export default function DestinationWedding() {
             <h2 className={styles.sectionHeading}>Our Wedding Planning Services</h2>
           </div>
           <div className={styles.servicesGrid}>
-            {services.map(({ icon, label, desc }, i) => (
+            {services.map(({ label, desc }, i) => (
               <div
                 key={label}
                 className={`${styles.serviceCard} ${styles.fadeSection}`}
                 ref={(el) => (serviceRefs.current[i] = el)}
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className={styles.serviceIcon}>{icon}</div>
                 <h3 className={styles.serviceLabel}>{label}</h3>
                 <p className={styles.serviceDesc}>{desc}</p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Why Chitralekha */}
+      <section className={`${styles.whySection} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[9] = el)}>
+        <div className={styles.whyOverlay} />
+        <Image src="/assets/images/P1188441.JPG.jpeg" alt="Resort background" fill className={styles.whyBg} />
+        <div className={styles.whyContent}>
+          <p className={styles.eyebrowLight}>Why Choose Us</p>
+          <h2 className={styles.whyHeading}>Why Chitralekha?</h2>
+          <div className={styles.whyPoints}>
+            {[
+              '7,500 sq ft open-air wedding lawn',
+              'Panoramic Mussoorie hill views',
+              'In-house catering with 200+ menu items',
+              'Dedicated wedding coordinator',
+              'On-site accommodation for guests',
+              'Customisable decor & entertainment',
+            ].map((pt) => (
+              <div key={pt} className={styles.whyPoint}>
+                <span className={styles.whyDot}>✦</span>
+                <span>{pt}</span>
+              </div>
+            ))}
+          </div>
+          <Link href="/contactUs" className={styles.heroBtn}>Book a Site Visit</Link>
         </div>
       </section>
 
@@ -275,7 +395,7 @@ export default function DestinationWedding() {
       </section>
 
       {/* Packages */}
-      <section className={styles.packagesSection}>
+      {/* <section className={styles.packagesSection}>
         <div className="container">
           <div className={`${styles.sectionHeader} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[8] = el)}>
             <p className={styles.eyebrow}>Tailored for You</p>
@@ -308,33 +428,8 @@ export default function DestinationWedding() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Why Chitralekha */}
-      <section className={`${styles.whySection} ${styles.fadeSection}`} ref={(el) => (sectionRefs.current[9] = el)}>
-        <div className={styles.whyOverlay} />
-        <Image src="/assets/images/back.jpg" alt="Resort background" fill className={styles.whyBg} />
-        <div className={styles.whyContent}>
-          <p className={styles.eyebrowLight}>Why Choose Us</p>
-          <h2 className={styles.whyHeading}>Why Chitralekha?</h2>
-          <div className={styles.whyPoints}>
-            {[
-              '7,500 sq ft open-air wedding lawn',
-              'Panoramic Mussoorie hill views',
-              'In-house catering with 200+ menu items',
-              'Dedicated wedding coordinator',
-              'On-site accommodation for guests',
-              'Customisable decor & entertainment',
-            ].map((pt) => (
-              <div key={pt} className={styles.whyPoint}>
-                <span className={styles.whyDot}>✦</span>
-                <span>{pt}</span>
-              </div>
-            ))}
-          </div>
-          <Link href="/contactUs" className={styles.heroBtn}>Book a Site Visit</Link>
-        </div>
-      </section>
 
       {/* Planning For — Events */}
       <section className={styles.eventsSection}>
@@ -421,6 +516,32 @@ export default function DestinationWedding() {
           <Link href="/contactUs" className={styles.heroBtn}>Start Planning Today</Link>
         </div>
       </section>
+
+      {/* Enquiry Modal */}
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+          <div className={styles.modalBox} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={() => setShowModal(false)} aria-label="Close">&#10005;</button>
+            <h2 className={styles.modalTitle}>Tell us About Your Event <span className={styles.modalDeco}>&laquo;&laquo;&middot;&middot;&middot;</span></h2>
+            <form onSubmit={handleSubmit} className={styles.modalForm}>
+              <div className={styles.modalRow}>
+                <input name="firstName" placeholder="First Name*" required value={form.firstName} onChange={handleChange} className={styles.modalInput} />
+                <input name="lastName" placeholder="Last Name*" required value={form.lastName} onChange={handleChange} className={styles.modalInput} />
+              </div>
+              <div className={styles.modalRow}>
+                <input name="email" type="email" placeholder="Email*" required value={form.email} onChange={handleChange} className={styles.modalInput} />
+                <input name="phone" placeholder="Phone Number*" required value={form.phone} onChange={handleChange} className={styles.modalInput} />
+              </div>
+              <div className={styles.modalRow}>
+                <input name="eventDate" type="date" placeholder="Event Date" value={form.eventDate} onChange={handleChange} className={styles.modalInput} />
+                <input name="location" placeholder="Location Preference" value={form.location} onChange={handleChange} className={styles.modalInput} />
+              </div>
+              <textarea name="message" placeholder="Additional Information/Requirements" value={form.message} onChange={handleChange} className={styles.modalTextarea} rows={4} />
+              <button type="submit" className={styles.modalBtn}>Send Enquiry</button>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );
