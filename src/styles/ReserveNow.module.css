@@ -1,7 +1,7 @@
 .section {
   position: relative;
   width: 100%;
-  background: #F4EBE8;
+  background-image: url("/assets/images/back.jpg");
   display: flex;
   align-items: center;
   justify-content: center;

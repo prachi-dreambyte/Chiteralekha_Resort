@@ -31,7 +31,7 @@
 .card {
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 620px;
   cursor: pointer;
 }
 

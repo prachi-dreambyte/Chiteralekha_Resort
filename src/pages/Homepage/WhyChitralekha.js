@@ -33,7 +33,7 @@ export default function WhyChiteralekha() {
       <div className={styles.whySection} ref={whyRef}>
         <div className={styles.whyTextBlock}>
           <h2 className={styles.whyHeading}>Why Chitralekha</h2>
-          <p className={styles.whyEyebrow}>Five Wilderness Retreats</p>
+          <p className={styles.whyEyebrow}>प्रकृति के करीब, सुकून के सबसे करीब।</p>
           <p className={styles.whyBody}>
             The Chitralekha boutique resort is more than just a resort in Dehradun - 
             this is a peaceful migration in the lap of nature.This hill resort in Dehradun provides breathtaking views of the Mussoorie hills, 

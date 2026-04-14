@@ -4,7 +4,7 @@
 .section {
   width: 100%;
   /* background: #fff; */
-   background-image:url("/assets/images/facilites.png");
+  background-image:url("/assets/images/background.png");
   background-size: cover;
   background-position: top;
   background-attachment: fixed;
@@ -74,6 +74,7 @@
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  padding: 0px 105px 99px 105px;
   /* no gap — borders handled by card */
 }
 

@@ -42,7 +42,7 @@ export default function Faq() {
     require('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
   return (
-    <section className="py-5" style={{ background: '#fff' }}>
+    <section className="py-5" style={{ background: '#f5f5dca6' }}>
       <div className="container py-3">
         <div className="row align-items-center g-5">
           {/* Left — image + heading */}
@@ -51,7 +51,7 @@ export default function Faq() {
               Got Questions?
             </p>
             <h2 className="fw-bold mb-4" style={{lineHeight: 1.3, color: '#5a6e4a', fontFamily: '"Paint-Brush", serif'}}>
-              Frequently Asked<br />Questions
+              Frequently Asked Questions
             </h2>
             <div className="position-relative rounded-4 overflow-hidden shadow-sm" style={{ height: '380px' }}>
               <Image

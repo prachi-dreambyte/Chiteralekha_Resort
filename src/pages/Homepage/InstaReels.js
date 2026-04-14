@@ -125,6 +125,7 @@ export default function InstaReels() {
 
       <header className={styles.header}>
         <h1 className={styles.title}>Instagram Reels</h1>
+        <p  style={{ color: '#8b6914', fontSize: '25px' }}>“सुकून भी, नज़ारे भी… सब कुछ एक जगह 💫”</p>
         <p className={styles.subtitle}>Click any reel to watch</p>
       </header>
 

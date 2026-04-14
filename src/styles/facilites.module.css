@@ -13,7 +13,7 @@
 
 /* ── Background wrapper ── */
 .bgWrapper {
-   background-image:url("/assets/images/facilites.png");
+   background-image:url("/assets/images/background.png");
   background-size: cover;
   background-position: top;
   background-attachment: fixed;
@@ -23,7 +23,7 @@
 .bgWrapper::before {
   content: '';
   position: absolute;
-  inset: 0;
+  /* inset: 0; */
   background: rgba(255, 255, 255, 0.88);
   pointer-events: none;
   z-index: 0;
@@ -71,8 +71,8 @@
 }
 
 .sub {
-  font-size: 15px;
-  color: #5a6e4a;
+  font-size: 18px;
+  color: #000;
   line-height: 1.8;
   margin: 0 auto;
   max-width: 880px;
@@ -165,7 +165,7 @@
 /* ── Description ── */
 .itemDesc {
   font-size: 18px;
-  color: #888;
+  color: #000;
   line-height: 1.65;
   max-width: 340px;
 }

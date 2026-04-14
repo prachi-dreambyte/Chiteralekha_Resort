@@ -11,7 +11,6 @@
 
 /* ── Section wrapper ───────────────────────────────── */
 .section {
-  /* background: #f8f9f5; */
   background-image: url("/assets/images/back3.png");
   padding: 60px 40px;
   overflow: hidden;
@@ -67,7 +66,7 @@
 /* ── Left: text side ───────────────────────────────── */
 .textSide p {
   font-size: 20px;
-  color: #4a5e3a;
+  color: #000;
   line-height: 1.85;
   margin-bottom: 1.25rem;
 }
@@ -188,7 +187,7 @@
 
 .whySection {
   /* margin-top: 6rem; */
-  background: #f5f0e8;
+  background: #f5f5dc96;
   border-radius: 16px;
   padding: 100px 220px;
   overflow: hidden;
@@ -216,8 +215,8 @@
 }
 
 .whyEyebrow {
-  font-size:20px;
-  letter-spacing: 5px;
+  font-size:23px;
+  letter-spacing: 1px;
   text-transform: uppercase;
       font-family: "Gilroy-Bold", sans-serif;
 
@@ -231,7 +230,7 @@
 
 .whyBody {
   font-size: 17px;
-  color: #5a6e4a;
+  color: #000;
   margin: 0 auto;
   line-height: 1.8;
   opacity: 0;
@@ -281,10 +280,10 @@
 } */
 
 .whyPanelOverlay {
-  position: absolute;
+  /* position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(10, 20, 5, 0.7) 0%, transparent 55%);
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease; */
 }
 
 .whyPanel:not(:hover) .whyPanelOverlay {

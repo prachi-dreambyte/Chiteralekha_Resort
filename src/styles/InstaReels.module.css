@@ -32,7 +32,7 @@
 .page {
   position: relative;
   min-height: 100vh;
-  background-color: var(--color-bg);
+  background-color:#f5f5dca6;
   font-family: var(--font-body);
   color: var(--color-text);
   padding: 80px 0 110px;
