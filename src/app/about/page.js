@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../../styles/AboutUsPage.module.css';
+import BuranshSection from '@/components/Buranshsection';
 
 const features = [
   {
@@ -62,44 +63,44 @@ const highlights = [
   },
 ];
 
-const teamMembers = [
-  {
-    name: 'Rajesh Kumar',
-    role: 'Founder & Owner',
-    image: '/assets/images/P1094049.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'General Manager',
-    image: '/assets/images/P1094073.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-  {
-    name: 'Amit Patel',
-    role: 'Operations Manager',
-    image: '/assets/images/P1094094.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-  {
-    name: 'Neha Verma',
-    role: 'Guest Relations Officer',
-    image: '/assets/images/P1094121.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-  {
-    name: 'Vikram Singh',
-    role: 'Chef & Culinary Director',
-    image: '/assets/images/P1094148.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-  {
-    name: 'Anjali Desai',
-    role: 'Wellness & Spa Manager',
-    image: '/assets/images/P1094160.jpg',
-    socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
-  },
-];
+// const teamMembers = [
+//   {
+//     name: 'Rajesh Kumar',
+//     role: 'Founder & Owner',
+//     image: '/assets/images/P1094049.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+//   {
+//     name: 'Priya Sharma',
+//     role: 'General Manager',
+//     image: '/assets/images/P1094073.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+//   {
+//     name: 'Amit Patel',
+//     role: 'Operations Manager',
+//     image: '/assets/images/P1094094.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+//   {
+//     name: 'Neha Verma',
+//     role: 'Guest Relations Officer',
+//     image: '/assets/images/P1094121.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+//   {
+//     name: 'Vikram Singh',
+//     role: 'Chef & Culinary Director',
+//     image: '/assets/images/P1094148.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+//   {
+//     name: 'Anjali Desai',
+//     role: 'Wellness & Spa Manager',
+//     image: '/assets/images/P1094160.jpg',
+//     socials: ['facebook', 'twitter', 'instagram', 'linkedin'],
+//   },
+// ];
 
 export default function AboutPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -258,50 +259,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-          {/* Video Section */}
-      <section className={styles.videoSection}>
-        <div className={styles.videoContainer}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className={styles.backgroundVideo}
-          >
-            <source src="/assets/videos/video1.mp4" type="video/mp4" />
-          </video>
-          <div className={styles.videoOverlay}></div>
-          <div className={styles.videoContent}>
-            <h2 className={styles.videoTitle}>Experience Chitralekha</h2>
-            <p className={styles.videoSubtitle}>
-              Discover the magic of luxury hospitality nestled in nature's embrace
-            </p>
-            <Link href="/accommodation" className={styles.videoBtn}>
-              Explore Now
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className={styles.featuresSection}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Your happiness guaranteed</h2>
-          <div className={styles.featuresGrid}>
-            {features.map((feature) => (
-              <div key={feature.title} className={styles.featureCard}>
-                <div className={styles.featureIcon}>{feature.icon}</div>
-                <h3 className={styles.featureTitle}>{feature.title}</h3>
-                <p className={styles.featureDescription}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Enjoy Section */}
-
-      {/* Mission & Vision Section with Parallax */}
+        {/* Mission & Vision Section with Parallax */}
       <section className={styles.missionVisionSection}>
         <div className={styles.container}>
           {/* Mission Card */}
@@ -346,7 +304,50 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Highlights Section */}
+          {/* Video Section */}
+      <section className={styles.videoSection}>
+        <div className={styles.videoContainer}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={styles.backgroundVideo}
+          >
+            <source src="/assets/videos/video1.mp4" type="video/mp4" />
+          </video>
+          <div className={styles.videoOverlay}></div>
+          <div className={styles.videoContent}>
+            <h2 className={styles.videoTitle}>Experience Chitralekha</h2>
+            <p className={styles.videoSubtitle}>
+              Discover the magic of luxury hospitality nestled in nature's embrace
+            </p>
+            <Link href="/accommodation" className={styles.videoBtn}>
+              Explore Now
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className={styles.featuresSection}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Your happiness guaranteed</h2>
+          <div className={styles.featuresGrid}>
+            {features.map((feature) => (
+              <div key={feature.title} className={styles.featureCard}>
+                <div className={styles.featureIcon}>{feature.icon}</div>
+                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                <p className={styles.featureDescription}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enjoy Section */}
+      <BuranshSection/>
+       {/* Highlights Section */}
       <section className={styles.highlightsSection}>
         <div className={styles.container}>
           {highlights.map((highlight, index) => (
@@ -369,7 +370,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Members Section */}
-      <section className={styles.teamSection}>
+      {/* <section className={styles.teamSection}>
         <div className={styles.container}>
           <p className={styles.eyebrow}>MEET OUR AMAZING TEAM</p>
           <h2 className={styles.teamTitle}>Strength In Every Member</h2>
@@ -420,7 +421,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Reservations Section */}
       <section className={styles.reservationSection}>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from '../styles/Footer.module.css';
 
 const socialLinks = [
-  { href: 'https://facebook.com', label: 'Facebook', icon: 'f' },
+  { href: 'https://www.facebook.com/share/18kBuH1NM8/', label: 'Facebook', icon: 'f' },
   { href: 'https://x.com', label: 'X', icon: '𝕏' },
   { href: 'https://instagram.com', label: 'Instagram', icon: '◎' },
   { href: 'https://linkedin.com', label: 'LinkedIn', icon: 'in' },
@@ -71,9 +71,11 @@ export default function Footer() {
           <div className={styles.col}>
             <h4 className={styles.colTitle}>Quick Links</h4>
             <ul className={styles.linkList}>
-              {['About Us', 'Accommodation', 'Featured Trips', 'Why Choose Us', 'FAQ'].map((l) => (
-                <li key={l}><Link href="#" className={styles.footLink}>{l}</Link></li>
-              ))}
+              <li><Link href="/about" className={styles.footLink}>About Us</Link></li>
+              <li><Link href="/accommodation" className={styles.footLink}>Accommodation</Link></li>
+              <li><Link href="/destination-wedding" className={styles.footLink}>Featured Trips</Link></li>
+              <li><Link href="/gallery" className={styles.footLink}>Why Choose Us</Link></li>
+              <li><Link href="/activity" className={styles.footLink}>Activities</Link></li>
             </ul>
           </div>
 
